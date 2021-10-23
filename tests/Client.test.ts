@@ -1,5 +1,5 @@
 import {ConfigOptions} from '@datenkraft/bb-base-api-ts-client';
-import {OrganisationStructureApiClient} from '../dist';
+import {OrganizationStructureApiClient} from '../dist';
 
 describe('Client Test (staging)', () => {
     test('Initialize and use the generated Client', (done) => {
@@ -10,12 +10,12 @@ describe('Client Test (staging)', () => {
                 'https://authentication-api.staging.backbone.datenkraft.info',
         };
 
-        OrganisationStructureApiClient.init(
+        OrganizationStructureApiClient.init(
             configOptions,
             'https://organization-structure-api.staging.backbone.datenkraft.info/v1'
         )
             .then(() => {
-                OrganisationStructureApiClient.Generated.ProjectService
+                OrganizationStructureApiClient.Generated.ProjectService
                     .getProject('ba74c99d-d622-4dcd-a1d5-f3db80d0a1c8')
                     .then((project) => {
                         expect(project).toEqual({
