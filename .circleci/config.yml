@@ -84,8 +84,8 @@ jobs:
             git config user.name $BITBUCKET_USER_NAME && \
             git checkout main && \
             git pull && \
-            npm version from-git -m "Bumped package version to %s" && \
-            git push
+            npm version from-git -m "Bumped package version to %s" --allow-same-version && \
+            git diff --quiet main origin/main || git push
       - run:
           name: Publish npm package
           command: npm publish --access public
