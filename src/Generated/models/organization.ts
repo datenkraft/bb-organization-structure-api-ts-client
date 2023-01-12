@@ -2,9 +2,6 @@
 /* tslint:disable */
 /* eslint-disable */
 
-/**
- * Class OrganizationResource
- */
 export type organization = {
     /**
      * Organization Id
