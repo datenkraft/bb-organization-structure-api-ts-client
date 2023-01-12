@@ -9,6 +9,8 @@ export type { authRoleCollection } from './models/authRoleCollection';
 export type { authRoleIdentityCollection } from './models/authRoleIdentityCollection';
 export type { authRoleIdentityResource } from './models/authRoleIdentityResource';
 export type { authRoleResource } from './models/authRoleResource';
+export type { collection } from './models/collection';
+export type { collectionPagination } from './models/collectionPagination';
 export type { createProjectSkuRequest } from './models/createProjectSkuRequest';
 export type { customer } from './models/customer';
 export type { deleteCustomerConflictError } from './models/deleteCustomerConflictError';

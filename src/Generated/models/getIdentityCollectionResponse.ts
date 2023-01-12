@@ -4,7 +4,4 @@
 
 import type { identity } from './identity';
 
-/**
- * Class IdentityResource
- */
 export type getIdentityCollectionResponse = Array<identity>;
