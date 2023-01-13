@@ -17,8 +17,8 @@ type Config = {
 }
 
 export const OpenAPI: Config = {
-    BASE: 'https://organization-structure.conqore.niceshops.com/v1',
-    VERSION: '1.0.0',
+    BASE: 'https://organization-structure-api.conqore.niceshops.com/v1',
+    VERSION: '1.beta',
     WITH_CREDENTIALS: false,
     TOKEN: undefined,
     USERNAME: undefined,

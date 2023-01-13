@@ -2,9 +2,6 @@
 /* tslint:disable */
 /* eslint-disable */
 
-/**
- * Class IdentityProjectResource
- */
 export type identityProject = {
     /**
      * Identity ID
