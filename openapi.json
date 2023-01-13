@@ -1886,6 +1886,19 @@
                         "schema": {
                             "type": "string"
                         }
+                    },
+                    {
+                        "name": "filter[onlyAllowed]",
+                        "in": "query",
+                        "description": "Query only allowed projects",
+                        "required": false,
+                        "schema": {
+                            "type": "string",
+                            "enum": [
+                                "true",
+                                "false"
+                            ]
+                        }
                     }
                 ],
                 "responses": {
