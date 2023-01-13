@@ -92,18 +92,21 @@ export class ProjectService {
      * Get a list of Projects
      * Get a list of Projects
      * @param filterAccountingProfileId Accounting Profile Id filter
+     * @param filterOnlyAllowed Query only allowed projects
      * @returns getProjectCollectionResponse OK
      * @returns errorResponse Unexpected error
      * @throws ApiError
      */
     public static async getProjectCollection(
         filterAccountingProfileId?: string,
+        filterOnlyAllowed?: 'true' | 'false',
     ): Promise<getProjectCollectionResponse | errorResponse> {
         const result = await __request({
             method: 'GET',
             path: `/project`,
             query: {
                 'filter[accountingProfileId]': filterAccountingProfileId,
+                'filter[onlyAllowed]': filterOnlyAllowed,
             },
             errors: {
                 400: `Bad Request`,
