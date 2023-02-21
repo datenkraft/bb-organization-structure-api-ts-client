@@ -1,5 +1,5 @@
 {
-  "name": "@datenkraft/bb-x-organization-structure-api-ts-client",
+  "name": "@datenkraft/bb-organization-structure-api-ts-client",
   "homepage": "https://bitbucket.org/datenkraft/bb-organization-structure-api-ts-client#readme",
   "version": "1.1.0",
   "description": "The Organization Structure API TS Client enables you to work with the Organization Structure API",
