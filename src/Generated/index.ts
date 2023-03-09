@@ -20,13 +20,17 @@ export type { deleteProjectConflictErrorResponse } from './models/deleteProjectC
 export type { error } from './models/error';
 export type { errorResponse } from './models/errorResponse';
 export type { getAuthPermissionCollectionResponse } from './models/getAuthPermissionCollectionResponse';
+export type { getCustomerCollectionResponse } from './models/getCustomerCollectionResponse';
 export type { getIdentityCollectionResponse } from './models/getIdentityCollectionResponse';
 export type { getIdentityProjectCollectionResponse } from './models/getIdentityProjectCollectionResponse';
+export type { getOrganizationCollectionResponse } from './models/getOrganizationCollectionResponse';
 export type { getProjectCollectionResponse } from './models/getProjectCollectionResponse';
 export type { identity } from './models/identity';
 export type { identityConflictError } from './models/identityConflictError';
 export type { identityConflictErrorResponse } from './models/identityConflictErrorResponse';
 export type { identityProject } from './models/identityProject';
+export type { information } from './models/information';
+export type { informationResponse } from './models/informationResponse';
 export type { newCustomer } from './models/newCustomer';
 export type { newIdentity } from './models/newIdentity';
 export type { newProject } from './models/newProject';

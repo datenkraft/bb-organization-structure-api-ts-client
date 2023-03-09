@@ -3,6 +3,7 @@
 /* eslint-disable */
 import type { customer } from '../models/customer';
 import type { errorResponse } from '../models/errorResponse';
+import type { getCustomerCollectionResponse } from '../models/getCustomerCollectionResponse';
 import type { newCustomer } from '../models/newCustomer';
 import { request as __request } from '../core/request';
 
@@ -80,6 +81,32 @@ export class CustomerService {
                 403: `Forbidden`,
                 404: `Not Found`,
                 409: `Conflict`,
+                500: `Server error`,
+            },
+        });
+        return result.body;
+    }
+
+    /**
+     * Get a list of customers
+     * Get a list of customers
+     * @param filterOrganizationId Organization Id
+     * @returns getCustomerCollectionResponse OK
+     * @throws ApiError
+     */
+    public static async getCustomerCollection(
+        filterOrganizationId?: string,
+    ): Promise<getCustomerCollectionResponse> {
+        const result = await __request({
+            method: 'GET',
+            path: `/customer`,
+            query: {
+                'filter[organizationId]': filterOrganizationId,
+            },
+            errors: {
+                400: `Bad Request`,
+                401: `Unauthorized`,
+                403: `Forbidden`,
                 500: `Server error`,
             },
         });
