@@ -2,6 +2,7 @@
 /* tslint:disable */
 /* eslint-disable */
 import type { errorResponse } from '../models/errorResponse';
+import type { getOrganizationCollectionResponse } from '../models/getOrganizationCollectionResponse';
 import type { organization } from '../models/organization';
 import { request as __request } from '../core/request';
 
@@ -26,6 +27,25 @@ export class OrganizationService {
                 401: `Unauthorized`,
                 403: `Forbidden`,
                 404: `Not Found`,
+                500: `Server error`,
+            },
+        });
+        return result.body;
+    }
+
+    /**
+     * Get a list of organizations
+     * Get a list of organizations
+     * @returns getOrganizationCollectionResponse OK
+     * @throws ApiError
+     */
+    public static async getOrganizationCollection(): Promise<getOrganizationCollectionResponse> {
+        const result = await __request({
+            method: 'GET',
+            path: `/organization`,
+            errors: {
+                401: `Unauthorized`,
+                403: `Forbidden`,
                 500: `Server error`,
             },
         });
