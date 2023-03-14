@@ -1,27 +1,32 @@
-import { ConfigOptions } from '@datenkraft/bb-base-api-ts-client';
-import { XxxApiClient } from '../dist';
-import { XxxApi } from '../dist/Generated';
+import { ConfigOptions } from "@datenkraft/bb-base-api-ts-client";
+import { organizationStructureApiClient } from "../dist";
+import { AuthRoleApi } from "../dist/Generated";
 
-describe('Client Test (staging)', () => {
-  test('Initialize and use the generated Client', (done) => {
+describe("Client Test (staging)", () => {
+  test("Initialize and use the generated Client", (done) => {
     const configOptions: ConfigOptions = {
-      clientId: process.env.DEV_CLIENT_ID ?? '',
-      clientSecret: process.env.DEV_CLIENT_SECRET_STAGING ?? '',
+      clientId: process.env.DEV_CLIENT_ID ?? "",
+      clientSecret: process.env.DEV_CLIENT_SECRET_STAGING ?? "",
       oAuthTokenHost:
-        'https://authentication-api.staging.backbone.datenkraft.info',
+        "https://authentication-api.staging.backbone.datenkraft.info",
     };
 
-    XxxApiClient.getApiConfig(
-      configOptions,
-      'https://xxx-api.staging.backbone.datenkraft.info/v1'
-    )
+    organizationStructureApiClient
+      .getApiConfig(
+        configOptions,
+        "https://organization-structure-api.staging.backbone.datenkraft.info/v1"
+      )
       .then((config) => {
-        const Xxxapi = new XxxApi(config);
+        const authRoleApi = new AuthRoleApi(config);
 
-        Xxxapi
-          .getXxxCollection()
+        authRoleApi
+          .getAuthRoleCollection()
           .then((data) => {
-        	//testcase  
+            if (data instanceof Array) {
+              expect(data).toContain({
+                roleCode: "bb-accounting-profile-api/auth_access-management",
+                name: "Role for access management",
+              });
             }
             done();
           })
@@ -30,4 +35,3 @@ describe('Client Test (staging)', () => {
       .catch((error) => done(error));
   });
 });
-

@@ -1,8 +1,8 @@
-# Backbone - xxx API TS Client
+# Backbone - organization-structure API TS Client
 
 ## Introduction
 
-The xxx API TS Client enables you to work with the xxx API.
+The organization-structure API TS Client enables you to work with the organization-structure API.
 
 ## Prerequisites
 
@@ -13,12 +13,12 @@ The xxx API TS Client enables you to work with the xxx API.
 You can use [npm](https://www.npmjs.com/) to install the package.
 
 ```bash
-npm install @datenkraft/bb-xxx-api-ts-client
+npm install @datenkraft/bb-organization-structure-api-ts-client
 ```
 
 ## Using the package
 
-The package can be used to communicate with the xxx API.
+The package can be used to communicate with the organization-structure API.
 The Client includes functionalities for every endpoint defined in the openapi.json.
 The Client is auto-generated with [OpenAPITools](https://openapi-generator.tech/docs/generators/typescript-axios) using an openapi.json file.
 
@@ -26,8 +26,8 @@ The Client is auto-generated with [OpenAPITools](https://openapi-generator.tech/
 
 ```typescript
 import { ConfigOptions } from '@datenkraft/bb-base-api-ts-client';
-import { XxxApiClient } from '@datenkraft/bb-xxx-api-ts-client';
-import { ShopApi } from '@datenkraft/bb-xxx-api-ts-client/Generated';
+import { organizationStructureApiClient } from '@datenkraft/bb-organization-structure-api-ts-client';
+import { ShopApi } from '@datenkraft/bb-organization-structure-api-ts-client/Generated';
 
 const configOptions: ConfigOptions = {
   clientId: 'clientId',
@@ -38,7 +38,7 @@ const configOptions: ConfigOptions = {
   useExternalIdToken: true,
 };
 
-XxxApiClient.getApiConfig(configOptions).then((config) => {
+organizationStructureApiClient.getApiConfig(configOptions).then((config) => {
   const XxxApi = new XxxApi(config);
   XxxApi.getXxxCollection().then((data) => {});
 });
