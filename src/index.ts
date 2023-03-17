@@ -1,7 +1,7 @@
 import { Auth, Config, ConfigOptions } from "@datenkraft/bb-base-api-ts-client";
 import { Configuration } from "./Generated";
 
-export namespace organizationStructureApiClient {
+export namespace OrganizationStructureApiClient {
   export async function getApiConfig(
     configOption: ConfigOptions,
     endpointUrl: string | null = null

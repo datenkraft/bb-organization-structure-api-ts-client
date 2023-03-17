@@ -1,5 +1,5 @@
 import { ConfigOptions } from "@datenkraft/bb-base-api-ts-client";
-import { organizationStructureApiClient } from "../dist";
+import { OrganizationStructureApiClient } from "../dist";
 import { AuthRoleApi } from "../dist/Generated";
 
 describe("Client Test (staging)", () => {
@@ -11,11 +11,10 @@ describe("Client Test (staging)", () => {
         "https://authentication-api.staging.backbone.datenkraft.info",
     };
 
-    organizationStructureApiClient
-      .getApiConfig(
-        configOptions,
-        "https://organization-structure-api.staging.backbone.datenkraft.info/v1"
-      )
+    OrganizationStructureApiClient.getApiConfig(
+      configOptions,
+      "https://organization-structure-api.staging.backbone.datenkraft.info/v1"
+    )
       .then((config) => {
         const authRoleApi = new AuthRoleApi(config);
 
