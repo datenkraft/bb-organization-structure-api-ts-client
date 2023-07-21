@@ -15,7 +15,7 @@
 
 // May contain unused imports in some cases
 // @ts-ignore
-import { NewProject } from './new-project';
+import { BaseProject } from './base-project';
 // May contain unused imports in some cases
 // @ts-ignore
 import { ProjectAllOf } from './project-all-of';
@@ -24,6 +24,6 @@ import { ProjectAllOf } from './project-all-of';
  * @type Project
  * @export
  */
-export type Project = NewProject & ProjectAllOf;
+export type Project = BaseProject & ProjectAllOf;
 
 

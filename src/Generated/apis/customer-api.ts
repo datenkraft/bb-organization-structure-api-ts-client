@@ -32,6 +32,8 @@ import { DeleteCustomerConflictErrorResponse } from '../models';
 import { ErrorResponse } from '../models';
 // @ts-ignore
 import { NewCustomer } from '../models';
+// @ts-ignore
+import { PatchCustomer } from '../models';
 /**
  * CustomerApi - axios parameter creator
  * @export
@@ -166,16 +168,20 @@ export const CustomerApiAxiosParamCreator = function (configuration?: Configurat
             };
         },
         /**
-         * Add a new Customer
-         * @summary Add a new Customer
-         * @param {NewCustomer} newCustomer 
+         * Update one or more fields of a Customer
+         * @summary Update a Customer
+         * @param {string} customerId Customer Id
+         * @param {PatchCustomer} patchCustomer 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        postCustomer: async (newCustomer: NewCustomer, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'newCustomer' is not null or undefined
-            assertParamExists('postCustomer', 'newCustomer', newCustomer)
-            const localVarPath = `/customer`;
+        patchCustomer: async (customerId: string, patchCustomer: PatchCustomer, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'customerId' is not null or undefined
+            assertParamExists('patchCustomer', 'customerId', customerId)
+            // verify required parameter 'patchCustomer' is not null or undefined
+            assertParamExists('patchCustomer', 'patchCustomer', patchCustomer)
+            const localVarPath = `/customer/{customerId}`
+                .replace(`{${"customerId"}}`, encodeURIComponent(String(customerId)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -183,7 +189,7 @@ export const CustomerApiAxiosParamCreator = function (configuration?: Configurat
                 baseOptions = configuration.baseOptions;
             }
 
-            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarRequestOptions = { method: 'PATCH', ...baseOptions, ...options};
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
@@ -202,7 +208,7 @@ export const CustomerApiAxiosParamCreator = function (configuration?: Configurat
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(newCustomer, localVarRequestOptions, configuration)
+            localVarRequestOptions.data = serializeDataIfNeeded(patchCustomer, localVarRequestOptions, configuration)
 
             return {
                 url: toPathString(localVarUrlObj),
@@ -210,20 +216,16 @@ export const CustomerApiAxiosParamCreator = function (configuration?: Configurat
             };
         },
         /**
-         * Update a Customer
-         * @summary Update a Customer
-         * @param {string} customerId Customer Id
+         * Add a new Customer
+         * @summary Add a new Customer
          * @param {NewCustomer} newCustomer 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        putCustomer: async (customerId: string, newCustomer: NewCustomer, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'customerId' is not null or undefined
-            assertParamExists('putCustomer', 'customerId', customerId)
+        postCustomer: async (newCustomer: NewCustomer, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'newCustomer' is not null or undefined
-            assertParamExists('putCustomer', 'newCustomer', newCustomer)
-            const localVarPath = `/customer/{customerId}`
-                .replace(`{${"customerId"}}`, encodeURIComponent(String(customerId)));
+            assertParamExists('postCustomer', 'newCustomer', newCustomer)
+            const localVarPath = `/customer`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -231,7 +233,7 @@ export const CustomerApiAxiosParamCreator = function (configuration?: Configurat
                 baseOptions = configuration.baseOptions;
             }
 
-            const localVarRequestOptions = { method: 'PUT', ...baseOptions, ...options};
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
@@ -301,6 +303,18 @@ export const CustomerApiFp = function(configuration?: Configuration) {
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
+         * Update one or more fields of a Customer
+         * @summary Update a Customer
+         * @param {string} customerId Customer Id
+         * @param {PatchCustomer} patchCustomer 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async patchCustomer(customerId: string, patchCustomer: PatchCustomer, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Customer>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.patchCustomer(customerId, patchCustomer, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
          * Add a new Customer
          * @summary Add a new Customer
          * @param {NewCustomer} newCustomer 
@@ -309,18 +323,6 @@ export const CustomerApiFp = function(configuration?: Configuration) {
          */
         async postCustomer(newCustomer: NewCustomer, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Customer>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.postCustomer(newCustomer, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
-        },
-        /**
-         * Update a Customer
-         * @summary Update a Customer
-         * @param {string} customerId Customer Id
-         * @param {NewCustomer} newCustomer 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async putCustomer(customerId: string, newCustomer: NewCustomer, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Customer>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.putCustomer(customerId, newCustomer, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
     }
@@ -364,6 +366,17 @@ export const CustomerApiFactory = function (configuration?: Configuration, baseP
             return localVarFp.getCustomerCollection(filterOrganizationId, options).then((request) => request(axios, basePath));
         },
         /**
+         * Update one or more fields of a Customer
+         * @summary Update a Customer
+         * @param {string} customerId Customer Id
+         * @param {PatchCustomer} patchCustomer 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        patchCustomer(customerId: string, patchCustomer: PatchCustomer, options?: any): AxiosPromise<Customer> {
+            return localVarFp.patchCustomer(customerId, patchCustomer, options).then((request) => request(axios, basePath));
+        },
+        /**
          * Add a new Customer
          * @summary Add a new Customer
          * @param {NewCustomer} newCustomer 
@@ -372,17 +385,6 @@ export const CustomerApiFactory = function (configuration?: Configuration, baseP
          */
         postCustomer(newCustomer: NewCustomer, options?: any): AxiosPromise<Customer> {
             return localVarFp.postCustomer(newCustomer, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * Update a Customer
-         * @summary Update a Customer
-         * @param {string} customerId Customer Id
-         * @param {NewCustomer} newCustomer 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        putCustomer(customerId: string, newCustomer: NewCustomer, options?: any): AxiosPromise<Customer> {
-            return localVarFp.putCustomer(customerId, newCustomer, options).then((request) => request(axios, basePath));
         },
     };
 };
@@ -424,6 +426,17 @@ export interface CustomerApiInterface {
     getCustomerCollection(filterOrganizationId?: string, options?: AxiosRequestConfig): AxiosPromise<Array<Customer>>;
 
     /**
+     * Update one or more fields of a Customer
+     * @summary Update a Customer
+     * @param {string} customerId Customer Id
+     * @param {PatchCustomer} patchCustomer 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof CustomerApiInterface
+     */
+    patchCustomer(customerId: string, patchCustomer: PatchCustomer, options?: AxiosRequestConfig): AxiosPromise<Customer>;
+
+    /**
      * Add a new Customer
      * @summary Add a new Customer
      * @param {NewCustomer} newCustomer 
@@ -432,17 +445,6 @@ export interface CustomerApiInterface {
      * @memberof CustomerApiInterface
      */
     postCustomer(newCustomer: NewCustomer, options?: AxiosRequestConfig): AxiosPromise<Customer>;
-
-    /**
-     * Update a Customer
-     * @summary Update a Customer
-     * @param {string} customerId Customer Id
-     * @param {NewCustomer} newCustomer 
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof CustomerApiInterface
-     */
-    putCustomer(customerId: string, newCustomer: NewCustomer, options?: AxiosRequestConfig): AxiosPromise<Customer>;
 
 }
 
@@ -490,6 +492,19 @@ export class CustomerApi extends BaseAPI implements CustomerApiInterface {
     }
 
     /**
+     * Update one or more fields of a Customer
+     * @summary Update a Customer
+     * @param {string} customerId Customer Id
+     * @param {PatchCustomer} patchCustomer 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof CustomerApi
+     */
+    public patchCustomer(customerId: string, patchCustomer: PatchCustomer, options?: AxiosRequestConfig) {
+        return CustomerApiFp(this.configuration).patchCustomer(customerId, patchCustomer, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
      * Add a new Customer
      * @summary Add a new Customer
      * @param {NewCustomer} newCustomer 
@@ -499,18 +514,5 @@ export class CustomerApi extends BaseAPI implements CustomerApiInterface {
      */
     public postCustomer(newCustomer: NewCustomer, options?: AxiosRequestConfig) {
         return CustomerApiFp(this.configuration).postCustomer(newCustomer, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * Update a Customer
-     * @summary Update a Customer
-     * @param {string} customerId Customer Id
-     * @param {NewCustomer} newCustomer 
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof CustomerApi
-     */
-    public putCustomer(customerId: string, newCustomer: NewCustomer, options?: AxiosRequestConfig) {
-        return CustomerApiFp(this.configuration).putCustomer(customerId, newCustomer, options).then((request) => request(this.axios, this.basePath));
     }
 }

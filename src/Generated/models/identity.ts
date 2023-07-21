@@ -15,15 +15,15 @@
 
 // May contain unused imports in some cases
 // @ts-ignore
-import { IdentityAllOf } from './identity-all-of';
+import { BaseIdentity } from './base-identity';
 // May contain unused imports in some cases
 // @ts-ignore
-import { NewIdentity } from './new-identity';
+import { IdentityAllOf } from './identity-all-of';
 
 /**
  * @type Identity
  * @export
  */
-export type Identity = IdentityAllOf & NewIdentity;
+export type Identity = BaseIdentity & IdentityAllOf;
 
 

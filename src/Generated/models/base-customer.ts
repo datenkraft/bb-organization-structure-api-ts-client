@@ -13,21 +13,24 @@
  */
 
 
-// May contain unused imports in some cases
-// @ts-ignore
-import { ProjectSku } from './project-sku';
 
 /**
- * Extra
+ * 
  * @export
- * @interface PostProjectSkuCollectionConflictErrorAllOfExtra
+ * @interface BaseCustomer
  */
-export interface PostProjectSkuCollectionConflictErrorAllOfExtra {
+export interface BaseCustomer {
     /**
-     * ProjectSkus
-     * @type {Array<ProjectSku>}
-     * @memberof PostProjectSkuCollectionConflictErrorAllOfExtra
+     * Name
+     * @type {string}
+     * @memberof BaseCustomer
      */
-    'projectSkus'?: Array<ProjectSku>;
+    'name'?: string;
+    /**
+     * Organization Id
+     * @type {string}
+     * @memberof BaseCustomer
+     */
+    'organizationId'?: string;
 }
 

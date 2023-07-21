@@ -166,16 +166,20 @@ export const ProjectApiAxiosParamCreator = function (configuration?: Configurati
             };
         },
         /**
-         * Post a new Project
-         * @summary Post a new Project
+         * Update one or more fields of a Project
+         * @summary Update a Project
+         * @param {string} projectId Project Id
          * @param {NewProject} newProject 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        postProject: async (newProject: NewProject, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        patchProject: async (projectId: string, newProject: NewProject, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'projectId' is not null or undefined
+            assertParamExists('patchProject', 'projectId', projectId)
             // verify required parameter 'newProject' is not null or undefined
-            assertParamExists('postProject', 'newProject', newProject)
-            const localVarPath = `/project`;
+            assertParamExists('patchProject', 'newProject', newProject)
+            const localVarPath = `/project/{projectId}`
+                .replace(`{${"projectId"}}`, encodeURIComponent(String(projectId)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -183,7 +187,7 @@ export const ProjectApiAxiosParamCreator = function (configuration?: Configurati
                 baseOptions = configuration.baseOptions;
             }
 
-            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarRequestOptions = { method: 'PATCH', ...baseOptions, ...options};
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
@@ -210,20 +214,16 @@ export const ProjectApiAxiosParamCreator = function (configuration?: Configurati
             };
         },
         /**
-         * Put a Project by projectId
-         * @summary Update Project by projectId
-         * @param {string} projectId Project Id
+         * Post a new Project
+         * @summary Post a new Project
          * @param {NewProject} newProject 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        putProject: async (projectId: string, newProject: NewProject, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'projectId' is not null or undefined
-            assertParamExists('putProject', 'projectId', projectId)
+        postProject: async (newProject: NewProject, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'newProject' is not null or undefined
-            assertParamExists('putProject', 'newProject', newProject)
-            const localVarPath = `/project/{projectId}`
-                .replace(`{${"projectId"}}`, encodeURIComponent(String(projectId)));
+            assertParamExists('postProject', 'newProject', newProject)
+            const localVarPath = `/project`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -231,7 +231,7 @@ export const ProjectApiAxiosParamCreator = function (configuration?: Configurati
                 baseOptions = configuration.baseOptions;
             }
 
-            const localVarRequestOptions = { method: 'PUT', ...baseOptions, ...options};
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
@@ -301,6 +301,18 @@ export const ProjectApiFp = function(configuration?: Configuration) {
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
+         * Update one or more fields of a Project
+         * @summary Update a Project
+         * @param {string} projectId Project Id
+         * @param {NewProject} newProject 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async patchProject(projectId: string, newProject: NewProject, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Project>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.patchProject(projectId, newProject, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
          * Post a new Project
          * @summary Post a new Project
          * @param {NewProject} newProject 
@@ -309,18 +321,6 @@ export const ProjectApiFp = function(configuration?: Configuration) {
          */
         async postProject(newProject: NewProject, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Project>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.postProject(newProject, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
-        },
-        /**
-         * Put a Project by projectId
-         * @summary Update Project by projectId
-         * @param {string} projectId Project Id
-         * @param {NewProject} newProject 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async putProject(projectId: string, newProject: NewProject, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Project>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.putProject(projectId, newProject, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
     }
@@ -364,6 +364,17 @@ export const ProjectApiFactory = function (configuration?: Configuration, basePa
             return localVarFp.getProjectCollection(filterAccountingProfileId, options).then((request) => request(axios, basePath));
         },
         /**
+         * Update one or more fields of a Project
+         * @summary Update a Project
+         * @param {string} projectId Project Id
+         * @param {NewProject} newProject 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        patchProject(projectId: string, newProject: NewProject, options?: any): AxiosPromise<Project> {
+            return localVarFp.patchProject(projectId, newProject, options).then((request) => request(axios, basePath));
+        },
+        /**
          * Post a new Project
          * @summary Post a new Project
          * @param {NewProject} newProject 
@@ -372,17 +383,6 @@ export const ProjectApiFactory = function (configuration?: Configuration, basePa
          */
         postProject(newProject: NewProject, options?: any): AxiosPromise<Project> {
             return localVarFp.postProject(newProject, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * Put a Project by projectId
-         * @summary Update Project by projectId
-         * @param {string} projectId Project Id
-         * @param {NewProject} newProject 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        putProject(projectId: string, newProject: NewProject, options?: any): AxiosPromise<Project> {
-            return localVarFp.putProject(projectId, newProject, options).then((request) => request(axios, basePath));
         },
     };
 };
@@ -424,6 +424,17 @@ export interface ProjectApiInterface {
     getProjectCollection(filterAccountingProfileId?: string, options?: AxiosRequestConfig): AxiosPromise<Array<Project>>;
 
     /**
+     * Update one or more fields of a Project
+     * @summary Update a Project
+     * @param {string} projectId Project Id
+     * @param {NewProject} newProject 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof ProjectApiInterface
+     */
+    patchProject(projectId: string, newProject: NewProject, options?: AxiosRequestConfig): AxiosPromise<Project>;
+
+    /**
      * Post a new Project
      * @summary Post a new Project
      * @param {NewProject} newProject 
@@ -432,17 +443,6 @@ export interface ProjectApiInterface {
      * @memberof ProjectApiInterface
      */
     postProject(newProject: NewProject, options?: AxiosRequestConfig): AxiosPromise<Project>;
-
-    /**
-     * Put a Project by projectId
-     * @summary Update Project by projectId
-     * @param {string} projectId Project Id
-     * @param {NewProject} newProject 
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof ProjectApiInterface
-     */
-    putProject(projectId: string, newProject: NewProject, options?: AxiosRequestConfig): AxiosPromise<Project>;
 
 }
 
@@ -490,6 +490,19 @@ export class ProjectApi extends BaseAPI implements ProjectApiInterface {
     }
 
     /**
+     * Update one or more fields of a Project
+     * @summary Update a Project
+     * @param {string} projectId Project Id
+     * @param {NewProject} newProject 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof ProjectApi
+     */
+    public patchProject(projectId: string, newProject: NewProject, options?: AxiosRequestConfig) {
+        return ProjectApiFp(this.configuration).patchProject(projectId, newProject, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
      * Post a new Project
      * @summary Post a new Project
      * @param {NewProject} newProject 
@@ -499,18 +512,5 @@ export class ProjectApi extends BaseAPI implements ProjectApiInterface {
      */
     public postProject(newProject: NewProject, options?: AxiosRequestConfig) {
         return ProjectApiFp(this.configuration).postProject(newProject, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * Put a Project by projectId
-     * @summary Update Project by projectId
-     * @param {string} projectId Project Id
-     * @param {NewProject} newProject 
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof ProjectApi
-     */
-    public putProject(projectId: string, newProject: NewProject, options?: AxiosRequestConfig) {
-        return ProjectApiFp(this.configuration).putProject(projectId, newProject, options).then((request) => request(this.axios, this.basePath));
     }
 }

@@ -15,19 +15,19 @@
 
 // May contain unused imports in some cases
 // @ts-ignore
-import { PostProjectSkuCollectionConflictErrorAllOfExtra } from './post-project-sku-collection-conflict-error-all-of-extra';
+import { DeleteProjectConflictErrorAllOfExtra } from './delete-project-conflict-error-all-of-extra';
 
 /**
  * 
  * @export
- * @interface PostProjectSkuCollectionConflictErrorAllOf
+ * @interface DeleteProjectConflictErrorAllOf
  */
-export interface PostProjectSkuCollectionConflictErrorAllOf {
+export interface DeleteProjectConflictErrorAllOf {
     /**
      * 
-     * @type {PostProjectSkuCollectionConflictErrorAllOfExtra}
-     * @memberof PostProjectSkuCollectionConflictErrorAllOf
+     * @type {DeleteProjectConflictErrorAllOfExtra}
+     * @memberof DeleteProjectConflictErrorAllOf
      */
-    'extra'?: PostProjectSkuCollectionConflictErrorAllOfExtra;
+    'extra'?: DeleteProjectConflictErrorAllOfExtra;
 }
 

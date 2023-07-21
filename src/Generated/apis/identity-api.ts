@@ -166,18 +166,18 @@ export const IdentityApiAxiosParamCreator = function (configuration?: Configurat
             };
         },
         /**
-         * Post a new Identity
-         * @summary Post a new Identity
-         * @param {string} identityId Identity Id  The identityId has to match to a OAuth client id from the Authentication API.
+         * Update one or more fields of an Identity
+         * @summary Update an Identity
+         * @param {string} identityId Identity Id
          * @param {NewIdentity} newIdentity 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        postIdentity: async (identityId: string, newIdentity: NewIdentity, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        patchIdentity: async (identityId: string, newIdentity: NewIdentity, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'identityId' is not null or undefined
-            assertParamExists('postIdentity', 'identityId', identityId)
+            assertParamExists('patchIdentity', 'identityId', identityId)
             // verify required parameter 'newIdentity' is not null or undefined
-            assertParamExists('postIdentity', 'newIdentity', newIdentity)
+            assertParamExists('patchIdentity', 'newIdentity', newIdentity)
             const localVarPath = `/identity/{identityId}`
                 .replace(`{${"identityId"}}`, encodeURIComponent(String(identityId)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
@@ -187,7 +187,7 @@ export const IdentityApiAxiosParamCreator = function (configuration?: Configurat
                 baseOptions = configuration.baseOptions;
             }
 
-            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarRequestOptions = { method: 'PATCH', ...baseOptions, ...options};
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
@@ -214,20 +214,16 @@ export const IdentityApiAxiosParamCreator = function (configuration?: Configurat
             };
         },
         /**
-         * Put an Identity by identityId
-         * @summary Update an Identity by identityId
-         * @param {string} identityId Identity Id
+         * Post a new Identity
+         * @summary Post a new Identity
          * @param {NewIdentity} newIdentity 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        putIdentity: async (identityId: string, newIdentity: NewIdentity, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'identityId' is not null or undefined
-            assertParamExists('putIdentity', 'identityId', identityId)
+        postIdentity: async (newIdentity: NewIdentity, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'newIdentity' is not null or undefined
-            assertParamExists('putIdentity', 'newIdentity', newIdentity)
-            const localVarPath = `/identity/{identityId}`
-                .replace(`{${"identityId"}}`, encodeURIComponent(String(identityId)));
+            assertParamExists('postIdentity', 'newIdentity', newIdentity)
+            const localVarPath = `/identity`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -235,7 +231,7 @@ export const IdentityApiAxiosParamCreator = function (configuration?: Configurat
                 baseOptions = configuration.baseOptions;
             }
 
-            const localVarRequestOptions = { method: 'PUT', ...baseOptions, ...options};
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
@@ -305,27 +301,26 @@ export const IdentityApiFp = function(configuration?: Configuration) {
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
-         * Post a new Identity
-         * @summary Post a new Identity
-         * @param {string} identityId Identity Id  The identityId has to match to a OAuth client id from the Authentication API.
-         * @param {NewIdentity} newIdentity 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async postIdentity(identityId: string, newIdentity: NewIdentity, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Identity>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.postIdentity(identityId, newIdentity, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
-        },
-        /**
-         * Put an Identity by identityId
-         * @summary Update an Identity by identityId
+         * Update one or more fields of an Identity
+         * @summary Update an Identity
          * @param {string} identityId Identity Id
          * @param {NewIdentity} newIdentity 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async putIdentity(identityId: string, newIdentity: NewIdentity, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Identity>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.putIdentity(identityId, newIdentity, options);
+        async patchIdentity(identityId: string, newIdentity: NewIdentity, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Identity>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.patchIdentity(identityId, newIdentity, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * Post a new Identity
+         * @summary Post a new Identity
+         * @param {NewIdentity} newIdentity 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async postIdentity(newIdentity: NewIdentity, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Identity>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.postIdentity(newIdentity, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
     }
@@ -369,26 +364,25 @@ export const IdentityApiFactory = function (configuration?: Configuration, baseP
             return localVarFp.getIdentityCollection(filterEmail, options).then((request) => request(axios, basePath));
         },
         /**
-         * Post a new Identity
-         * @summary Post a new Identity
-         * @param {string} identityId Identity Id  The identityId has to match to a OAuth client id from the Authentication API.
-         * @param {NewIdentity} newIdentity 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        postIdentity(identityId: string, newIdentity: NewIdentity, options?: any): AxiosPromise<Identity> {
-            return localVarFp.postIdentity(identityId, newIdentity, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * Put an Identity by identityId
-         * @summary Update an Identity by identityId
+         * Update one or more fields of an Identity
+         * @summary Update an Identity
          * @param {string} identityId Identity Id
          * @param {NewIdentity} newIdentity 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        putIdentity(identityId: string, newIdentity: NewIdentity, options?: any): AxiosPromise<Identity> {
-            return localVarFp.putIdentity(identityId, newIdentity, options).then((request) => request(axios, basePath));
+        patchIdentity(identityId: string, newIdentity: NewIdentity, options?: any): AxiosPromise<Identity> {
+            return localVarFp.patchIdentity(identityId, newIdentity, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * Post a new Identity
+         * @summary Post a new Identity
+         * @param {NewIdentity} newIdentity 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        postIdentity(newIdentity: NewIdentity, options?: any): AxiosPromise<Identity> {
+            return localVarFp.postIdentity(newIdentity, options).then((request) => request(axios, basePath));
         },
     };
 };
@@ -430,26 +424,25 @@ export interface IdentityApiInterface {
     getIdentityCollection(filterEmail?: string, options?: AxiosRequestConfig): AxiosPromise<Array<Identity>>;
 
     /**
-     * Post a new Identity
-     * @summary Post a new Identity
-     * @param {string} identityId Identity Id  The identityId has to match to a OAuth client id from the Authentication API.
-     * @param {NewIdentity} newIdentity 
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof IdentityApiInterface
-     */
-    postIdentity(identityId: string, newIdentity: NewIdentity, options?: AxiosRequestConfig): AxiosPromise<Identity>;
-
-    /**
-     * Put an Identity by identityId
-     * @summary Update an Identity by identityId
+     * Update one or more fields of an Identity
+     * @summary Update an Identity
      * @param {string} identityId Identity Id
      * @param {NewIdentity} newIdentity 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof IdentityApiInterface
      */
-    putIdentity(identityId: string, newIdentity: NewIdentity, options?: AxiosRequestConfig): AxiosPromise<Identity>;
+    patchIdentity(identityId: string, newIdentity: NewIdentity, options?: AxiosRequestConfig): AxiosPromise<Identity>;
+
+    /**
+     * Post a new Identity
+     * @summary Post a new Identity
+     * @param {NewIdentity} newIdentity 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof IdentityApiInterface
+     */
+    postIdentity(newIdentity: NewIdentity, options?: AxiosRequestConfig): AxiosPromise<Identity>;
 
 }
 
@@ -497,28 +490,27 @@ export class IdentityApi extends BaseAPI implements IdentityApiInterface {
     }
 
     /**
-     * Post a new Identity
-     * @summary Post a new Identity
-     * @param {string} identityId Identity Id  The identityId has to match to a OAuth client id from the Authentication API.
-     * @param {NewIdentity} newIdentity 
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof IdentityApi
-     */
-    public postIdentity(identityId: string, newIdentity: NewIdentity, options?: AxiosRequestConfig) {
-        return IdentityApiFp(this.configuration).postIdentity(identityId, newIdentity, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * Put an Identity by identityId
-     * @summary Update an Identity by identityId
+     * Update one or more fields of an Identity
+     * @summary Update an Identity
      * @param {string} identityId Identity Id
      * @param {NewIdentity} newIdentity 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof IdentityApi
      */
-    public putIdentity(identityId: string, newIdentity: NewIdentity, options?: AxiosRequestConfig) {
-        return IdentityApiFp(this.configuration).putIdentity(identityId, newIdentity, options).then((request) => request(this.axios, this.basePath));
+    public patchIdentity(identityId: string, newIdentity: NewIdentity, options?: AxiosRequestConfig) {
+        return IdentityApiFp(this.configuration).patchIdentity(identityId, newIdentity, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * Post a new Identity
+     * @summary Post a new Identity
+     * @param {NewIdentity} newIdentity 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof IdentityApi
+     */
+    public postIdentity(newIdentity: NewIdentity, options?: AxiosRequestConfig) {
+        return IdentityApiFp(this.configuration).postIdentity(newIdentity, options).then((request) => request(this.axios, this.basePath));
     }
 }
