@@ -58,12 +58,12 @@ export class AuthRoleIdentityService {
     /**
      * Delete one or more role to identity assignments in this resource server
      * Delete one or more role to identity assignments in this resource server
-     * @param requestBody
+     * @param requestBody CAUTION If the request is sent with an empty body, all relations are deleted!
      * @returns errorResponse Unexpected error
      * @throws ApiError
      */
     public static async deleteAuthRoleIdentityCollection(
-        requestBody: authRoleIdentityCollection,
+        requestBody?: authRoleIdentityCollection,
     ): Promise<errorResponse> {
         const result = await __request({
             method: 'DELETE',

@@ -2,17 +2,11 @@
 /* tslint:disable */
 /* eslint-disable */
 
-export type customer = {
+import type { baseCustomer } from './baseCustomer';
+
+export type customer = ({
     /**
      * Customer Id
      */
-    customerId: string;
-    /**
-     * Organization Id
-     */
-    organizationId: string;
-    /**
-     * Name
-     */
-    name: string;
-}
+    customerId?: string,
+} & baseCustomer);

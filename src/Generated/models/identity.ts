@@ -2,11 +2,11 @@
 /* tslint:disable */
 /* eslint-disable */
 
-import type { newIdentity } from './newIdentity';
+import type { baseIdentity } from './baseIdentity';
 
 export type identity = ({
     /**
      * Identity Id
      */
     identityId?: string,
-} & newIdentity);
+} & baseIdentity);

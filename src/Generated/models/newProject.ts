@@ -2,17 +2,6 @@
 /* tslint:disable */
 /* eslint-disable */
 
-export type newProject = {
-    /**
-     * Customer Id
-     */
-    customerId: string;
-    /**
-     * Project name
-     */
-    name: string;
-    /**
-     * Accounting Profile Id
-     */
-    accountingProfileId: string;
-}
+import type { baseProject } from './baseProject';
+
+export type newProject = baseProject;

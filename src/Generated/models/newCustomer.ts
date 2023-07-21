@@ -2,13 +2,6 @@
 /* tslint:disable */
 /* eslint-disable */
 
-export type newCustomer = {
-    /**
-     * Organization Id
-     */
-    organizationId: string;
-    /**
-     * Name
-     */
-    name: string;
-}
+import type { baseCustomer } from './baseCustomer';
+
+export type newCustomer = baseCustomer;
