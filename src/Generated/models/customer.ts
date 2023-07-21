@@ -13,30 +13,17 @@
  */
 
 
+// May contain unused imports in some cases
+// @ts-ignore
+import { BaseCustomer } from './base-customer';
+// May contain unused imports in some cases
+// @ts-ignore
+import { CustomerAllOf } from './customer-all-of';
 
 /**
- * 
+ * @type Customer
  * @export
- * @interface Customer
  */
-export interface Customer {
-    /**
-     * Customer Id
-     * @type {string}
-     * @memberof Customer
-     */
-    'customerId': string;
-    /**
-     * Organization Id
-     * @type {string}
-     * @memberof Customer
-     */
-    'organizationId': string;
-    /**
-     * Name
-     * @type {string}
-     * @memberof Customer
-     */
-    'name': string;
-}
+export type Customer = BaseCustomer & CustomerAllOf;
+
 

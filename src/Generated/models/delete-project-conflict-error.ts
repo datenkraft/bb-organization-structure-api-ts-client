@@ -15,18 +15,18 @@
 
 // May contain unused imports in some cases
 // @ts-ignore
+import { DeleteProjectConflictErrorAllOf } from './delete-project-conflict-error-all-of';
+// May contain unused imports in some cases
+// @ts-ignore
+import { DeleteProjectConflictErrorAllOfExtra } from './delete-project-conflict-error-all-of-extra';
+// May contain unused imports in some cases
+// @ts-ignore
 import { ModelError } from './model-error';
-// May contain unused imports in some cases
-// @ts-ignore
-import { PostProjectSkuCollectionConflictErrorAllOf } from './post-project-sku-collection-conflict-error-all-of';
-// May contain unused imports in some cases
-// @ts-ignore
-import { PostProjectSkuCollectionConflictErrorAllOfExtra } from './post-project-sku-collection-conflict-error-all-of-extra';
 
 /**
  * @type DeleteProjectConflictError
  * @export
  */
-export type DeleteProjectConflictError = ModelError & PostProjectSkuCollectionConflictErrorAllOf;
+export type DeleteProjectConflictError = DeleteProjectConflictErrorAllOf & ModelError;
 
 

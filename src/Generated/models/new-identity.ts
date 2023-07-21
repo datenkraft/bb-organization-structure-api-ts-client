@@ -13,24 +13,14 @@
  */
 
 
+// May contain unused imports in some cases
+// @ts-ignore
+import { BaseIdentity } from './base-identity';
 
 /**
- * 
+ * @type NewIdentity
  * @export
- * @interface NewIdentity
  */
-export interface NewIdentity {
-    /**
-     * Email
-     * @type {string}
-     * @memberof NewIdentity
-     */
-    'email': string;
-    /**
-     * Customer Id
-     * @type {string}
-     * @memberof NewIdentity
-     */
-    'customerId': string;
-}
+export type NewIdentity = BaseIdentity;
+
 

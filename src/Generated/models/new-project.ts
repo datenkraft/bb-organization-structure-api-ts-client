@@ -13,30 +13,14 @@
  */
 
 
+// May contain unused imports in some cases
+// @ts-ignore
+import { BaseProject } from './base-project';
 
 /**
- * 
+ * @type NewProject
  * @export
- * @interface NewProject
  */
-export interface NewProject {
-    /**
-     * Customer Id
-     * @type {string}
-     * @memberof NewProject
-     */
-    'customerId': string;
-    /**
-     * Project name
-     * @type {string}
-     * @memberof NewProject
-     */
-    'name': string;
-    /**
-     * Accounting Profile Id
-     * @type {string}
-     * @memberof NewProject
-     */
-    'accountingProfileId': string;
-}
+export type NewProject = BaseProject;
+
 
