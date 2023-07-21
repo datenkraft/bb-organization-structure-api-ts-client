@@ -2,13 +2,6 @@
 /* tslint:disable */
 /* eslint-disable */
 
-export type newIdentity = {
-    /**
-     * Email
-     */
-    email: string;
-    /**
-     * Customer Id
-     */
-    customerId: string;
-}
+import type { baseIdentity } from './baseIdentity';
+
+export type newIdentity = baseIdentity;

@@ -2,11 +2,11 @@
 /* tslint:disable */
 /* eslint-disable */
 
-import type { newProject } from './newProject';
+import type { baseProject } from './baseProject';
 
 export type project = ({
     /**
      * Project Id
      */
     projectId?: string,
-} & newProject);
+} & baseProject);
