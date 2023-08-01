@@ -21,6 +21,9 @@ import { DeleteProjectConflictErrorAllOf } from './delete-project-conflict-error
 import { DeleteProjectConflictErrorAllOfExtra } from './delete-project-conflict-error-all-of-extra';
 // May contain unused imports in some cases
 // @ts-ignore
+import { ErrorReferencesInner } from './error-references-inner';
+// May contain unused imports in some cases
+// @ts-ignore
 import { ModelError } from './model-error';
 
 /**

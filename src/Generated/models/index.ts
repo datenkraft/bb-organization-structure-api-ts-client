@@ -20,6 +20,7 @@ export * from './delete-project-conflict-error';
 export * from './delete-project-conflict-error-all-of';
 export * from './delete-project-conflict-error-all-of-extra';
 export * from './delete-project-conflict-error-response';
+export * from './error-references-inner';
 export * from './error-response';
 export * from './identity';
 export * from './identity-all-of';
