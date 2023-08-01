@@ -40,6 +40,7 @@ models/delete-project-conflict-error-all-of-extra.ts
 models/delete-project-conflict-error-all-of.ts
 models/delete-project-conflict-error-response.ts
 models/delete-project-conflict-error.ts
+models/error-references-inner.ts
 models/error-response.ts
 models/identity-all-of.ts
 models/identity-conflict-error-all-of-extra.ts

@@ -21,6 +21,9 @@ import { DeleteCustomerConflictErrorAllOf } from './delete-customer-conflict-err
 import { DeleteCustomerConflictErrorAllOfExtra } from './delete-customer-conflict-error-all-of-extra';
 // May contain unused imports in some cases
 // @ts-ignore
+import { ErrorReferencesInner } from './error-references-inner';
+// May contain unused imports in some cases
+// @ts-ignore
 import { ModelError } from './model-error';
 
 /**
