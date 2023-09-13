@@ -21,8 +21,8 @@ describe("Client Test (staging)", () => {
         authRoleApi
           .getAuthRoleCollection()
           .then(({ data: response }) => {
-            if (response instanceof Array) {
-              expect(response).toContainEqual({
+            if (response.data instanceof Array) {
+              expect(response.data).toContainEqual({
                 roleCode:
                   "bb-organization-structure-api/auth_access-management",
                 name: "Role for access management",
