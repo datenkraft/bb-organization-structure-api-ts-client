@@ -13,7 +13,7 @@ describe("Client Test (staging)", () => {
 
     OrganizationStructureApiClient.getApiConfig(
       configOptions,
-      "https://organization-structure-api.staging.backbone.datenkraft.info/v1"
+      "https://organization-structure-api.staging.backbone.datenkraft.info/v2"
     )
       .then((config) => {
         const authRoleApi = new AuthRoleApi(config);
