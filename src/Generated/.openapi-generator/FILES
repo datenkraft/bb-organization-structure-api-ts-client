@@ -50,6 +50,16 @@ models/error-references-inner.ts
 models/error-response.ts
 models/get-auth-permission-collection-response-all-of.ts
 models/get-auth-permission-collection-response.ts
+models/get-customer-collection-response-all-of.ts
+models/get-customer-collection-response.ts
+models/get-identity-collection-response-all-of.ts
+models/get-identity-collection-response.ts
+models/get-identity-project-collection-response-all-of.ts
+models/get-identity-project-collection-response.ts
+models/get-organization-collection-response-all-of.ts
+models/get-organization-collection-response.ts
+models/get-project-collection-response-all-of.ts
+models/get-project-collection-response.ts
 models/identity-all-of.ts
 models/identity-conflict-error-all-of-extra.ts
 models/identity-conflict-error-all-of.ts
@@ -73,5 +83,7 @@ models/patch-project.ts
 models/post-project-sku-collection-conflict-error-response.ts
 models/post-project-sku-collection-conflict-error.ts
 models/project-all-of.ts
+models/project-sku-collection-all-of.ts
+models/project-sku-collection.ts
 models/project-sku.ts
 models/project.ts
