@@ -4,9 +4,9 @@
 
 import type { baseProject } from './baseProject';
 
-export type project = ({
+export type project = (baseProject & {
     /**
      * Project Id
      */
     projectId?: string,
-} & baseProject);
+});
