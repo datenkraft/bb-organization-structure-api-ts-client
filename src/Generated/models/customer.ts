@@ -4,9 +4,9 @@
 
 import type { baseCustomer } from './baseCustomer';
 
-export type customer = ({
+export type customer = (baseCustomer & {
     /**
      * Customer Id
      */
     customerId?: string,
-} & baseCustomer);
+});
