@@ -4,9 +4,9 @@
 
 import type { baseIdentity } from './baseIdentity';
 
-export type identity = ({
+export type identity = (baseIdentity & {
     /**
      * Identity Id
      */
     identityId?: string,
-} & baseIdentity);
+});
