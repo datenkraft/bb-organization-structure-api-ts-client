@@ -128,11 +128,10 @@ export const ProjectApiAxiosParamCreator = function (configuration?: Configurati
          * @param {number} [page] The page to read. Default is the first page.
          * @param {number} [pageSize] The maximum size per page is 100. Default is 100.
          * @param {'default' | 'totalCount'} [paginationMode] The paginationMode to use: - default: The total number of items in the collection will not be calculated. - totalCount: The total number of items in the collection will be calculated. This can mean loss of performance.
-         * @param {string} [filterAccountingProfileId] Accounting Profile Id filter
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getProjectCollection: async (page?: number, pageSize?: number, paginationMode?: 'default' | 'totalCount', filterAccountingProfileId?: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        getProjectCollection: async (page?: number, pageSize?: number, paginationMode?: 'default' | 'totalCount', options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             const localVarPath = `/project`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -163,10 +162,6 @@ export const ProjectApiAxiosParamCreator = function (configuration?: Configurati
 
             if (paginationMode !== undefined) {
                 localVarQueryParameter['paginationMode'] = paginationMode;
-            }
-
-            if (filterAccountingProfileId !== undefined) {
-                localVarQueryParameter['filter[accountingProfileId]'] = filterAccountingProfileId;
             }
 
 
@@ -310,12 +305,11 @@ export const ProjectApiFp = function(configuration?: Configuration) {
          * @param {number} [page] The page to read. Default is the first page.
          * @param {number} [pageSize] The maximum size per page is 100. Default is 100.
          * @param {'default' | 'totalCount'} [paginationMode] The paginationMode to use: - default: The total number of items in the collection will not be calculated. - totalCount: The total number of items in the collection will be calculated. This can mean loss of performance.
-         * @param {string} [filterAccountingProfileId] Accounting Profile Id filter
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async getProjectCollection(page?: number, pageSize?: number, paginationMode?: 'default' | 'totalCount', filterAccountingProfileId?: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<GetProjectCollectionResponse>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.getProjectCollection(page, pageSize, paginationMode, filterAccountingProfileId, options);
+        async getProjectCollection(page?: number, pageSize?: number, paginationMode?: 'default' | 'totalCount', options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<GetProjectCollectionResponse>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getProjectCollection(page, pageSize, paginationMode, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
@@ -377,12 +371,11 @@ export const ProjectApiFactory = function (configuration?: Configuration, basePa
          * @param {number} [page] The page to read. Default is the first page.
          * @param {number} [pageSize] The maximum size per page is 100. Default is 100.
          * @param {'default' | 'totalCount'} [paginationMode] The paginationMode to use: - default: The total number of items in the collection will not be calculated. - totalCount: The total number of items in the collection will be calculated. This can mean loss of performance.
-         * @param {string} [filterAccountingProfileId] Accounting Profile Id filter
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getProjectCollection(page?: number, pageSize?: number, paginationMode?: 'default' | 'totalCount', filterAccountingProfileId?: string, options?: any): AxiosPromise<GetProjectCollectionResponse> {
-            return localVarFp.getProjectCollection(page, pageSize, paginationMode, filterAccountingProfileId, options).then((request) => request(axios, basePath));
+        getProjectCollection(page?: number, pageSize?: number, paginationMode?: 'default' | 'totalCount', options?: any): AxiosPromise<GetProjectCollectionResponse> {
+            return localVarFp.getProjectCollection(page, pageSize, paginationMode, options).then((request) => request(axios, basePath));
         },
         /**
          * Update one or more fields of a Project
@@ -440,12 +433,11 @@ export interface ProjectApiInterface {
      * @param {number} [page] The page to read. Default is the first page.
      * @param {number} [pageSize] The maximum size per page is 100. Default is 100.
      * @param {'default' | 'totalCount'} [paginationMode] The paginationMode to use: - default: The total number of items in the collection will not be calculated. - totalCount: The total number of items in the collection will be calculated. This can mean loss of performance.
-     * @param {string} [filterAccountingProfileId] Accounting Profile Id filter
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof ProjectApiInterface
      */
-    getProjectCollection(page?: number, pageSize?: number, paginationMode?: 'default' | 'totalCount', filterAccountingProfileId?: string, options?: AxiosRequestConfig): AxiosPromise<GetProjectCollectionResponse>;
+    getProjectCollection(page?: number, pageSize?: number, paginationMode?: 'default' | 'totalCount', options?: AxiosRequestConfig): AxiosPromise<GetProjectCollectionResponse>;
 
     /**
      * Update one or more fields of a Project
@@ -507,13 +499,12 @@ export class ProjectApi extends BaseAPI implements ProjectApiInterface {
      * @param {number} [page] The page to read. Default is the first page.
      * @param {number} [pageSize] The maximum size per page is 100. Default is 100.
      * @param {'default' | 'totalCount'} [paginationMode] The paginationMode to use: - default: The total number of items in the collection will not be calculated. - totalCount: The total number of items in the collection will be calculated. This can mean loss of performance.
-     * @param {string} [filterAccountingProfileId] Accounting Profile Id filter
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof ProjectApi
      */
-    public getProjectCollection(page?: number, pageSize?: number, paginationMode?: 'default' | 'totalCount', filterAccountingProfileId?: string, options?: AxiosRequestConfig) {
-        return ProjectApiFp(this.configuration).getProjectCollection(page, pageSize, paginationMode, filterAccountingProfileId, options).then((request) => request(this.axios, this.basePath));
+    public getProjectCollection(page?: number, pageSize?: number, paginationMode?: 'default' | 'totalCount', options?: AxiosRequestConfig) {
+        return ProjectApiFp(this.configuration).getProjectCollection(page, pageSize, paginationMode, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
