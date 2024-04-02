@@ -32,11 +32,5 @@ export interface BaseProject {
      * @memberof BaseProject
      */
     'name'?: string;
-    /**
-     * Accounting Profile Id
-     * @type {string}
-     * @memberof BaseProject
-     */
-    'accountingProfileId'?: string;
 }
 
