@@ -26,11 +26,5 @@ export interface BaseIdentity {
      * @memberof BaseIdentity
      */
     'email'?: string;
-    /**
-     * Customer Id
-     * @type {string}
-     * @memberof BaseIdentity
-     */
-    'customerId'?: string;
 }
 

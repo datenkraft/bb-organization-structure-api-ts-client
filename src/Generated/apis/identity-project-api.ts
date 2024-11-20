@@ -28,6 +28,8 @@ import { BASE_PATH, COLLECTION_FORMATS, RequestArgs, BaseAPI, RequiredError } fr
 import { ErrorResponse } from '../models';
 // @ts-ignore
 import { GetIdentityProjectCollectionResponse } from '../models';
+// @ts-ignore
+import { IdentityProject } from '../models';
 /**
  * IdentityProjectApi - axios parameter creator
  * @export
@@ -87,6 +89,50 @@ export const IdentityProjectApiAxiosParamCreator = function (configuration?: Con
                 options: localVarRequestOptions,
             };
         },
+        /**
+         * Post a new Identity to Project relation
+         * @summary Post a new Identity to Project relation
+         * @param {IdentityProject} identityProject 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        postIdentityProject: async (identityProject: IdentityProject, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'identityProject' is not null or undefined
+            assertParamExists('postIdentityProject', 'identityProject', identityProject)
+            const localVarPath = `/identity-project`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication oAuthAuthorization required
+            // oauth required
+            await setOAuthToObject(localVarHeaderParameter, "oAuthAuthorization", [], configuration)
+
+            // authentication bearerAuth required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(identityProject, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
     }
 };
 
@@ -108,6 +154,17 @@ export const IdentityProjectApiFp = function(configuration?: Configuration) {
          */
         async getIdentityProjectCollection(page?: number, pageSize?: number, paginationMode?: 'default' | 'totalCount', options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<GetIdentityProjectCollectionResponse>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.getIdentityProjectCollection(page, pageSize, paginationMode, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * Post a new Identity to Project relation
+         * @summary Post a new Identity to Project relation
+         * @param {IdentityProject} identityProject 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async postIdentityProject(identityProject: IdentityProject, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<IdentityProject>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.postIdentityProject(identityProject, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
     }
@@ -132,6 +189,16 @@ export const IdentityProjectApiFactory = function (configuration?: Configuration
         getIdentityProjectCollection(page?: number, pageSize?: number, paginationMode?: 'default' | 'totalCount', options?: any): AxiosPromise<GetIdentityProjectCollectionResponse> {
             return localVarFp.getIdentityProjectCollection(page, pageSize, paginationMode, options).then((request) => request(axios, basePath));
         },
+        /**
+         * Post a new Identity to Project relation
+         * @summary Post a new Identity to Project relation
+         * @param {IdentityProject} identityProject 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        postIdentityProject(identityProject: IdentityProject, options?: any): AxiosPromise<IdentityProject> {
+            return localVarFp.postIdentityProject(identityProject, options).then((request) => request(axios, basePath));
+        },
     };
 };
 
@@ -152,6 +219,16 @@ export interface IdentityProjectApiInterface {
      * @memberof IdentityProjectApiInterface
      */
     getIdentityProjectCollection(page?: number, pageSize?: number, paginationMode?: 'default' | 'totalCount', options?: AxiosRequestConfig): AxiosPromise<GetIdentityProjectCollectionResponse>;
+
+    /**
+     * Post a new Identity to Project relation
+     * @summary Post a new Identity to Project relation
+     * @param {IdentityProject} identityProject 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof IdentityProjectApiInterface
+     */
+    postIdentityProject(identityProject: IdentityProject, options?: AxiosRequestConfig): AxiosPromise<IdentityProject>;
 
 }
 
@@ -174,5 +251,17 @@ export class IdentityProjectApi extends BaseAPI implements IdentityProjectApiInt
      */
     public getIdentityProjectCollection(page?: number, pageSize?: number, paginationMode?: 'default' | 'totalCount', options?: AxiosRequestConfig) {
         return IdentityProjectApiFp(this.configuration).getIdentityProjectCollection(page, pageSize, paginationMode, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * Post a new Identity to Project relation
+     * @summary Post a new Identity to Project relation
+     * @param {IdentityProject} identityProject 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof IdentityProjectApi
+     */
+    public postIdentityProject(identityProject: IdentityProject, options?: AxiosRequestConfig) {
+        return IdentityProjectApiFp(this.configuration).postIdentityProject(identityProject, options).then((request) => request(this.axios, this.basePath));
     }
 }
