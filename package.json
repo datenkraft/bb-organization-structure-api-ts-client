@@ -1,7 +1,7 @@
 {
   "name": "@datenkraft/bb-organization-structure-api-ts-client",
   "homepage": "https://bitbucket.org/datenkraft/bb-organization-structure-api-ts-client#readme",
-  "version": "2.6.8",
+  "version": "2.6.9",
   "description": "The organization-structure API TS Client enables you to work with the organization-structure API",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
