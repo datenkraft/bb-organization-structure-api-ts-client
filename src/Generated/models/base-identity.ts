@@ -26,5 +26,11 @@ export interface BaseIdentity {
      * @memberof BaseIdentity
      */
     'email'?: string;
+    /**
+     * Is the identity active?
+     * @type {boolean}
+     * @memberof BaseIdentity
+     */
+    'active'?: boolean;
 }
 

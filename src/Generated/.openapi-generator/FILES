@@ -61,10 +61,6 @@ models/get-organization-collection-response.ts
 models/get-project-collection-response-all-of.ts
 models/get-project-collection-response.ts
 models/identity-all-of.ts
-models/identity-conflict-error-all-of-extra.ts
-models/identity-conflict-error-all-of.ts
-models/identity-conflict-error-response.ts
-models/identity-conflict-error.ts
 models/identity-project.ts
 models/identity.ts
 models/index.ts
