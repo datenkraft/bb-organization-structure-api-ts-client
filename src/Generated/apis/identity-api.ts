@@ -31,9 +31,9 @@ import { GetIdentityCollectionResponse } from '../models';
 // @ts-ignore
 import { Identity } from '../models';
 // @ts-ignore
-import { IdentityConflictErrorResponse } from '../models';
-// @ts-ignore
 import { NewIdentity } from '../models';
+// @ts-ignore
+import { PatchIdentity } from '../models';
 /**
  * IdentityApi - axios parameter creator
  * @export
@@ -131,10 +131,11 @@ export const IdentityApiAxiosParamCreator = function (configuration?: Configurat
          * @param {number} [pageSize] The maximum size per page is 100. Default is 100.
          * @param {'default' | 'totalCount'} [paginationMode] The paginationMode to use: - default: The total number of items in the collection will not be calculated. - totalCount: The total number of items in the collection will be calculated. This can mean loss of performance.
          * @param {string} [filterEmail] Email filter
+         * @param {boolean} [filterIsActive] A filter to only return identities that are active or not.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getIdentityCollection: async (page?: number, pageSize?: number, paginationMode?: 'default' | 'totalCount', filterEmail?: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        getIdentityCollection: async (page?: number, pageSize?: number, paginationMode?: 'default' | 'totalCount', filterEmail?: string, filterIsActive?: boolean, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             const localVarPath = `/identity`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -171,6 +172,10 @@ export const IdentityApiAxiosParamCreator = function (configuration?: Configurat
                 localVarQueryParameter['filter[email]'] = filterEmail;
             }
 
+            if (filterIsActive !== undefined) {
+                localVarQueryParameter['filter[isActive]'] = filterIsActive;
+            }
+
 
     
             setSearchParams(localVarUrlObj, localVarQueryParameter);
@@ -186,15 +191,15 @@ export const IdentityApiAxiosParamCreator = function (configuration?: Configurat
          * Update one or more fields of an Identity
          * @summary Update an Identity
          * @param {string} identityId Identity Id
-         * @param {NewIdentity} newIdentity 
+         * @param {PatchIdentity} patchIdentity 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        patchIdentity: async (identityId: string, newIdentity: NewIdentity, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        patchIdentity: async (identityId: string, patchIdentity: PatchIdentity, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'identityId' is not null or undefined
             assertParamExists('patchIdentity', 'identityId', identityId)
-            // verify required parameter 'newIdentity' is not null or undefined
-            assertParamExists('patchIdentity', 'newIdentity', newIdentity)
+            // verify required parameter 'patchIdentity' is not null or undefined
+            assertParamExists('patchIdentity', 'patchIdentity', patchIdentity)
             const localVarPath = `/identity/{identityId}`
                 .replace(`{${"identityId"}}`, encodeURIComponent(String(identityId)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
@@ -223,7 +228,7 @@ export const IdentityApiAxiosParamCreator = function (configuration?: Configurat
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(newIdentity, localVarRequestOptions, configuration)
+            localVarRequestOptions.data = serializeDataIfNeeded(patchIdentity, localVarRequestOptions, configuration)
 
             return {
                 url: toPathString(localVarUrlObj),
@@ -313,23 +318,24 @@ export const IdentityApiFp = function(configuration?: Configuration) {
          * @param {number} [pageSize] The maximum size per page is 100. Default is 100.
          * @param {'default' | 'totalCount'} [paginationMode] The paginationMode to use: - default: The total number of items in the collection will not be calculated. - totalCount: The total number of items in the collection will be calculated. This can mean loss of performance.
          * @param {string} [filterEmail] Email filter
+         * @param {boolean} [filterIsActive] A filter to only return identities that are active or not.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async getIdentityCollection(page?: number, pageSize?: number, paginationMode?: 'default' | 'totalCount', filterEmail?: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<GetIdentityCollectionResponse>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.getIdentityCollection(page, pageSize, paginationMode, filterEmail, options);
+        async getIdentityCollection(page?: number, pageSize?: number, paginationMode?: 'default' | 'totalCount', filterEmail?: string, filterIsActive?: boolean, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<GetIdentityCollectionResponse>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getIdentityCollection(page, pageSize, paginationMode, filterEmail, filterIsActive, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
          * Update one or more fields of an Identity
          * @summary Update an Identity
          * @param {string} identityId Identity Id
-         * @param {NewIdentity} newIdentity 
+         * @param {PatchIdentity} patchIdentity 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async patchIdentity(identityId: string, newIdentity: NewIdentity, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Identity>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.patchIdentity(identityId, newIdentity, options);
+        async patchIdentity(identityId: string, patchIdentity: PatchIdentity, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Identity>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.patchIdentity(identityId, patchIdentity, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
@@ -380,22 +386,23 @@ export const IdentityApiFactory = function (configuration?: Configuration, baseP
          * @param {number} [pageSize] The maximum size per page is 100. Default is 100.
          * @param {'default' | 'totalCount'} [paginationMode] The paginationMode to use: - default: The total number of items in the collection will not be calculated. - totalCount: The total number of items in the collection will be calculated. This can mean loss of performance.
          * @param {string} [filterEmail] Email filter
+         * @param {boolean} [filterIsActive] A filter to only return identities that are active or not.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getIdentityCollection(page?: number, pageSize?: number, paginationMode?: 'default' | 'totalCount', filterEmail?: string, options?: any): AxiosPromise<GetIdentityCollectionResponse> {
-            return localVarFp.getIdentityCollection(page, pageSize, paginationMode, filterEmail, options).then((request) => request(axios, basePath));
+        getIdentityCollection(page?: number, pageSize?: number, paginationMode?: 'default' | 'totalCount', filterEmail?: string, filterIsActive?: boolean, options?: any): AxiosPromise<GetIdentityCollectionResponse> {
+            return localVarFp.getIdentityCollection(page, pageSize, paginationMode, filterEmail, filterIsActive, options).then((request) => request(axios, basePath));
         },
         /**
          * Update one or more fields of an Identity
          * @summary Update an Identity
          * @param {string} identityId Identity Id
-         * @param {NewIdentity} newIdentity 
+         * @param {PatchIdentity} patchIdentity 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        patchIdentity(identityId: string, newIdentity: NewIdentity, options?: any): AxiosPromise<Identity> {
-            return localVarFp.patchIdentity(identityId, newIdentity, options).then((request) => request(axios, basePath));
+        patchIdentity(identityId: string, patchIdentity: PatchIdentity, options?: any): AxiosPromise<Identity> {
+            return localVarFp.patchIdentity(identityId, patchIdentity, options).then((request) => request(axios, basePath));
         },
         /**
          * Post a new Identity
@@ -443,22 +450,23 @@ export interface IdentityApiInterface {
      * @param {number} [pageSize] The maximum size per page is 100. Default is 100.
      * @param {'default' | 'totalCount'} [paginationMode] The paginationMode to use: - default: The total number of items in the collection will not be calculated. - totalCount: The total number of items in the collection will be calculated. This can mean loss of performance.
      * @param {string} [filterEmail] Email filter
+     * @param {boolean} [filterIsActive] A filter to only return identities that are active or not.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof IdentityApiInterface
      */
-    getIdentityCollection(page?: number, pageSize?: number, paginationMode?: 'default' | 'totalCount', filterEmail?: string, options?: AxiosRequestConfig): AxiosPromise<GetIdentityCollectionResponse>;
+    getIdentityCollection(page?: number, pageSize?: number, paginationMode?: 'default' | 'totalCount', filterEmail?: string, filterIsActive?: boolean, options?: AxiosRequestConfig): AxiosPromise<GetIdentityCollectionResponse>;
 
     /**
      * Update one or more fields of an Identity
      * @summary Update an Identity
      * @param {string} identityId Identity Id
-     * @param {NewIdentity} newIdentity 
+     * @param {PatchIdentity} patchIdentity 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof IdentityApiInterface
      */
-    patchIdentity(identityId: string, newIdentity: NewIdentity, options?: AxiosRequestConfig): AxiosPromise<Identity>;
+    patchIdentity(identityId: string, patchIdentity: PatchIdentity, options?: AxiosRequestConfig): AxiosPromise<Identity>;
 
     /**
      * Post a new Identity
@@ -510,25 +518,26 @@ export class IdentityApi extends BaseAPI implements IdentityApiInterface {
      * @param {number} [pageSize] The maximum size per page is 100. Default is 100.
      * @param {'default' | 'totalCount'} [paginationMode] The paginationMode to use: - default: The total number of items in the collection will not be calculated. - totalCount: The total number of items in the collection will be calculated. This can mean loss of performance.
      * @param {string} [filterEmail] Email filter
+     * @param {boolean} [filterIsActive] A filter to only return identities that are active or not.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof IdentityApi
      */
-    public getIdentityCollection(page?: number, pageSize?: number, paginationMode?: 'default' | 'totalCount', filterEmail?: string, options?: AxiosRequestConfig) {
-        return IdentityApiFp(this.configuration).getIdentityCollection(page, pageSize, paginationMode, filterEmail, options).then((request) => request(this.axios, this.basePath));
+    public getIdentityCollection(page?: number, pageSize?: number, paginationMode?: 'default' | 'totalCount', filterEmail?: string, filterIsActive?: boolean, options?: AxiosRequestConfig) {
+        return IdentityApiFp(this.configuration).getIdentityCollection(page, pageSize, paginationMode, filterEmail, filterIsActive, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
      * Update one or more fields of an Identity
      * @summary Update an Identity
      * @param {string} identityId Identity Id
-     * @param {NewIdentity} newIdentity 
+     * @param {PatchIdentity} patchIdentity 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof IdentityApi
      */
-    public patchIdentity(identityId: string, newIdentity: NewIdentity, options?: AxiosRequestConfig) {
-        return IdentityApiFp(this.configuration).patchIdentity(identityId, newIdentity, options).then((request) => request(this.axios, this.basePath));
+    public patchIdentity(identityId: string, patchIdentity: PatchIdentity, options?: AxiosRequestConfig) {
+        return IdentityApiFp(this.configuration).patchIdentity(identityId, patchIdentity, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
