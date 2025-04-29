@@ -42,10 +42,12 @@ export const IdentityProjectApiAxiosParamCreator = function (configuration?: Con
          * @param {number} [page] The page to read. Default is the first page.
          * @param {number} [pageSize] The maximum size per page is 100. Default is 100.
          * @param {'default' | 'totalCount'} [paginationMode] The paginationMode to use: - default: The total number of items in the collection will not be calculated. - totalCount: The total number of items in the collection will be calculated. This can mean loss of performance.
+         * @param {string} [filterIdentityId] Filter by identityId
+         * @param {string} [filterProjectId] Filter by projectId
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getIdentityProjectCollection: async (page?: number, pageSize?: number, paginationMode?: 'default' | 'totalCount', options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        getIdentityProjectCollection: async (page?: number, pageSize?: number, paginationMode?: 'default' | 'totalCount', filterIdentityId?: string, filterProjectId?: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             const localVarPath = `/identity-project`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -76,6 +78,14 @@ export const IdentityProjectApiAxiosParamCreator = function (configuration?: Con
 
             if (paginationMode !== undefined) {
                 localVarQueryParameter['paginationMode'] = paginationMode;
+            }
+
+            if (filterIdentityId !== undefined) {
+                localVarQueryParameter['filter[identityId]'] = filterIdentityId;
+            }
+
+            if (filterProjectId !== undefined) {
+                localVarQueryParameter['filter[projectId]'] = filterProjectId;
             }
 
 
@@ -149,11 +159,13 @@ export const IdentityProjectApiFp = function(configuration?: Configuration) {
          * @param {number} [page] The page to read. Default is the first page.
          * @param {number} [pageSize] The maximum size per page is 100. Default is 100.
          * @param {'default' | 'totalCount'} [paginationMode] The paginationMode to use: - default: The total number of items in the collection will not be calculated. - totalCount: The total number of items in the collection will be calculated. This can mean loss of performance.
+         * @param {string} [filterIdentityId] Filter by identityId
+         * @param {string} [filterProjectId] Filter by projectId
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async getIdentityProjectCollection(page?: number, pageSize?: number, paginationMode?: 'default' | 'totalCount', options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<GetIdentityProjectCollectionResponse>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.getIdentityProjectCollection(page, pageSize, paginationMode, options);
+        async getIdentityProjectCollection(page?: number, pageSize?: number, paginationMode?: 'default' | 'totalCount', filterIdentityId?: string, filterProjectId?: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<GetIdentityProjectCollectionResponse>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getIdentityProjectCollection(page, pageSize, paginationMode, filterIdentityId, filterProjectId, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
@@ -183,11 +195,13 @@ export const IdentityProjectApiFactory = function (configuration?: Configuration
          * @param {number} [page] The page to read. Default is the first page.
          * @param {number} [pageSize] The maximum size per page is 100. Default is 100.
          * @param {'default' | 'totalCount'} [paginationMode] The paginationMode to use: - default: The total number of items in the collection will not be calculated. - totalCount: The total number of items in the collection will be calculated. This can mean loss of performance.
+         * @param {string} [filterIdentityId] Filter by identityId
+         * @param {string} [filterProjectId] Filter by projectId
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getIdentityProjectCollection(page?: number, pageSize?: number, paginationMode?: 'default' | 'totalCount', options?: any): AxiosPromise<GetIdentityProjectCollectionResponse> {
-            return localVarFp.getIdentityProjectCollection(page, pageSize, paginationMode, options).then((request) => request(axios, basePath));
+        getIdentityProjectCollection(page?: number, pageSize?: number, paginationMode?: 'default' | 'totalCount', filterIdentityId?: string, filterProjectId?: string, options?: any): AxiosPromise<GetIdentityProjectCollectionResponse> {
+            return localVarFp.getIdentityProjectCollection(page, pageSize, paginationMode, filterIdentityId, filterProjectId, options).then((request) => request(axios, basePath));
         },
         /**
          * Post a new Identity to Project relation
@@ -214,11 +228,13 @@ export interface IdentityProjectApiInterface {
      * @param {number} [page] The page to read. Default is the first page.
      * @param {number} [pageSize] The maximum size per page is 100. Default is 100.
      * @param {'default' | 'totalCount'} [paginationMode] The paginationMode to use: - default: The total number of items in the collection will not be calculated. - totalCount: The total number of items in the collection will be calculated. This can mean loss of performance.
+     * @param {string} [filterIdentityId] Filter by identityId
+     * @param {string} [filterProjectId] Filter by projectId
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof IdentityProjectApiInterface
      */
-    getIdentityProjectCollection(page?: number, pageSize?: number, paginationMode?: 'default' | 'totalCount', options?: AxiosRequestConfig): AxiosPromise<GetIdentityProjectCollectionResponse>;
+    getIdentityProjectCollection(page?: number, pageSize?: number, paginationMode?: 'default' | 'totalCount', filterIdentityId?: string, filterProjectId?: string, options?: AxiosRequestConfig): AxiosPromise<GetIdentityProjectCollectionResponse>;
 
     /**
      * Post a new Identity to Project relation
@@ -245,12 +261,14 @@ export class IdentityProjectApi extends BaseAPI implements IdentityProjectApiInt
      * @param {number} [page] The page to read. Default is the first page.
      * @param {number} [pageSize] The maximum size per page is 100. Default is 100.
      * @param {'default' | 'totalCount'} [paginationMode] The paginationMode to use: - default: The total number of items in the collection will not be calculated. - totalCount: The total number of items in the collection will be calculated. This can mean loss of performance.
+     * @param {string} [filterIdentityId] Filter by identityId
+     * @param {string} [filterProjectId] Filter by projectId
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof IdentityProjectApi
      */
-    public getIdentityProjectCollection(page?: number, pageSize?: number, paginationMode?: 'default' | 'totalCount', options?: AxiosRequestConfig) {
-        return IdentityProjectApiFp(this.configuration).getIdentityProjectCollection(page, pageSize, paginationMode, options).then((request) => request(this.axios, this.basePath));
+    public getIdentityProjectCollection(page?: number, pageSize?: number, paginationMode?: 'default' | 'totalCount', filterIdentityId?: string, filterProjectId?: string, options?: AxiosRequestConfig) {
+        return IdentityProjectApiFp(this.configuration).getIdentityProjectCollection(page, pageSize, paginationMode, filterIdentityId, filterProjectId, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
