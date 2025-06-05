@@ -102,11 +102,11 @@ export const IdentityProjectApiAxiosParamCreator = function (configuration?: Con
         /**
          * Post a new Identity to Project relation
          * @summary Post a new Identity to Project relation
-         * @param {IdentityProject} identityProject 
+         * @param {Array<IdentityProject>} identityProject 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        postIdentityProject: async (identityProject: IdentityProject, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        postIdentityProject: async (identityProject: Array<IdentityProject>, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'identityProject' is not null or undefined
             assertParamExists('postIdentityProject', 'identityProject', identityProject)
             const localVarPath = `/identity-project`;
@@ -171,11 +171,11 @@ export const IdentityProjectApiFp = function(configuration?: Configuration) {
         /**
          * Post a new Identity to Project relation
          * @summary Post a new Identity to Project relation
-         * @param {IdentityProject} identityProject 
+         * @param {Array<IdentityProject>} identityProject 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async postIdentityProject(identityProject: IdentityProject, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<IdentityProject>> {
+        async postIdentityProject(identityProject: Array<IdentityProject>, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<IdentityProject>>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.postIdentityProject(identityProject, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
@@ -206,11 +206,11 @@ export const IdentityProjectApiFactory = function (configuration?: Configuration
         /**
          * Post a new Identity to Project relation
          * @summary Post a new Identity to Project relation
-         * @param {IdentityProject} identityProject 
+         * @param {Array<IdentityProject>} identityProject 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        postIdentityProject(identityProject: IdentityProject, options?: any): AxiosPromise<IdentityProject> {
+        postIdentityProject(identityProject: Array<IdentityProject>, options?: any): AxiosPromise<Array<IdentityProject>> {
             return localVarFp.postIdentityProject(identityProject, options).then((request) => request(axios, basePath));
         },
     };
@@ -239,12 +239,12 @@ export interface IdentityProjectApiInterface {
     /**
      * Post a new Identity to Project relation
      * @summary Post a new Identity to Project relation
-     * @param {IdentityProject} identityProject 
+     * @param {Array<IdentityProject>} identityProject 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof IdentityProjectApiInterface
      */
-    postIdentityProject(identityProject: IdentityProject, options?: AxiosRequestConfig): AxiosPromise<IdentityProject>;
+    postIdentityProject(identityProject: Array<IdentityProject>, options?: AxiosRequestConfig): AxiosPromise<Array<IdentityProject>>;
 
 }
 
@@ -274,12 +274,12 @@ export class IdentityProjectApi extends BaseAPI implements IdentityProjectApiInt
     /**
      * Post a new Identity to Project relation
      * @summary Post a new Identity to Project relation
-     * @param {IdentityProject} identityProject 
+     * @param {Array<IdentityProject>} identityProject 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof IdentityProjectApi
      */
-    public postIdentityProject(identityProject: IdentityProject, options?: AxiosRequestConfig) {
+    public postIdentityProject(identityProject: Array<IdentityProject>, options?: AxiosRequestConfig) {
         return IdentityProjectApiFp(this.configuration).postIdentityProject(identityProject, options).then((request) => request(this.axios, this.basePath));
     }
 }
