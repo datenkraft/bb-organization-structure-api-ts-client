@@ -37,6 +37,50 @@ import { IdentityProject } from '../models';
 export const IdentityProjectApiAxiosParamCreator = function (configuration?: Configuration) {
     return {
         /**
+         * Delete Identity to Project relations
+         * @summary Delete Identity to Project relations
+         * @param {Array<IdentityProject>} identityProject 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        deleteIdentityProject: async (identityProject: Array<IdentityProject>, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'identityProject' is not null or undefined
+            assertParamExists('deleteIdentityProject', 'identityProject', identityProject)
+            const localVarPath = `/identity-project`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'DELETE', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication oAuthAuthorization required
+            // oauth required
+            await setOAuthToObject(localVarHeaderParameter, "oAuthAuthorization", [], configuration)
+
+            // authentication bearerAuth required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(identityProject, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
          * Get a list of Identities and the Projects they are related to
          * @summary Get a list of Identities and the Projects they are related to
          * @param {number} [page] The page to read. Default is the first page.
@@ -100,8 +144,8 @@ export const IdentityProjectApiAxiosParamCreator = function (configuration?: Con
             };
         },
         /**
-         * Post a new Identity to Project relation
-         * @summary Post a new Identity to Project relation
+         * Post new Identity to Project relations
+         * @summary Post new Identity to Project relations
          * @param {Array<IdentityProject>} identityProject 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -154,6 +198,17 @@ export const IdentityProjectApiFp = function(configuration?: Configuration) {
     const localVarAxiosParamCreator = IdentityProjectApiAxiosParamCreator(configuration)
     return {
         /**
+         * Delete Identity to Project relations
+         * @summary Delete Identity to Project relations
+         * @param {Array<IdentityProject>} identityProject 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async deleteIdentityProject(identityProject: Array<IdentityProject>, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.deleteIdentityProject(identityProject, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
          * Get a list of Identities and the Projects they are related to
          * @summary Get a list of Identities and the Projects they are related to
          * @param {number} [page] The page to read. Default is the first page.
@@ -169,8 +224,8 @@ export const IdentityProjectApiFp = function(configuration?: Configuration) {
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
-         * Post a new Identity to Project relation
-         * @summary Post a new Identity to Project relation
+         * Post new Identity to Project relations
+         * @summary Post new Identity to Project relations
          * @param {Array<IdentityProject>} identityProject 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -190,6 +245,16 @@ export const IdentityProjectApiFactory = function (configuration?: Configuration
     const localVarFp = IdentityProjectApiFp(configuration)
     return {
         /**
+         * Delete Identity to Project relations
+         * @summary Delete Identity to Project relations
+         * @param {Array<IdentityProject>} identityProject 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        deleteIdentityProject(identityProject: Array<IdentityProject>, options?: any): AxiosPromise<void> {
+            return localVarFp.deleteIdentityProject(identityProject, options).then((request) => request(axios, basePath));
+        },
+        /**
          * Get a list of Identities and the Projects they are related to
          * @summary Get a list of Identities and the Projects they are related to
          * @param {number} [page] The page to read. Default is the first page.
@@ -204,8 +269,8 @@ export const IdentityProjectApiFactory = function (configuration?: Configuration
             return localVarFp.getIdentityProjectCollection(page, pageSize, paginationMode, filterIdentityId, filterProjectId, options).then((request) => request(axios, basePath));
         },
         /**
-         * Post a new Identity to Project relation
-         * @summary Post a new Identity to Project relation
+         * Post new Identity to Project relations
+         * @summary Post new Identity to Project relations
          * @param {Array<IdentityProject>} identityProject 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -223,6 +288,16 @@ export const IdentityProjectApiFactory = function (configuration?: Configuration
  */
 export interface IdentityProjectApiInterface {
     /**
+     * Delete Identity to Project relations
+     * @summary Delete Identity to Project relations
+     * @param {Array<IdentityProject>} identityProject 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof IdentityProjectApiInterface
+     */
+    deleteIdentityProject(identityProject: Array<IdentityProject>, options?: AxiosRequestConfig): AxiosPromise<void>;
+
+    /**
      * Get a list of Identities and the Projects they are related to
      * @summary Get a list of Identities and the Projects they are related to
      * @param {number} [page] The page to read. Default is the first page.
@@ -237,8 +312,8 @@ export interface IdentityProjectApiInterface {
     getIdentityProjectCollection(page?: number, pageSize?: number, paginationMode?: 'default' | 'totalCount', filterIdentityId?: string, filterProjectId?: string, options?: AxiosRequestConfig): AxiosPromise<GetIdentityProjectCollectionResponse>;
 
     /**
-     * Post a new Identity to Project relation
-     * @summary Post a new Identity to Project relation
+     * Post new Identity to Project relations
+     * @summary Post new Identity to Project relations
      * @param {Array<IdentityProject>} identityProject 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -256,6 +331,18 @@ export interface IdentityProjectApiInterface {
  */
 export class IdentityProjectApi extends BaseAPI implements IdentityProjectApiInterface {
     /**
+     * Delete Identity to Project relations
+     * @summary Delete Identity to Project relations
+     * @param {Array<IdentityProject>} identityProject 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof IdentityProjectApi
+     */
+    public deleteIdentityProject(identityProject: Array<IdentityProject>, options?: AxiosRequestConfig) {
+        return IdentityProjectApiFp(this.configuration).deleteIdentityProject(identityProject, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
      * Get a list of Identities and the Projects they are related to
      * @summary Get a list of Identities and the Projects they are related to
      * @param {number} [page] The page to read. Default is the first page.
@@ -272,8 +359,8 @@ export class IdentityProjectApi extends BaseAPI implements IdentityProjectApiInt
     }
 
     /**
-     * Post a new Identity to Project relation
-     * @summary Post a new Identity to Project relation
+     * Post new Identity to Project relations
+     * @summary Post new Identity to Project relations
      * @param {Array<IdentityProject>} identityProject 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
