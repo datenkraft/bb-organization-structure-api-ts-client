@@ -133,10 +133,11 @@ export const IdentityApiAxiosParamCreator = function (configuration?: Configurat
          * @param {string} [filterEmail] Email filter
          * @param {boolean} [filterIsActive] A filter to only return identities that are active or not.
          * @param {string} [filterProjectId] A filter to only return identities assigned to a specific project.
+         * @param {string} [filterSearch] A filter to search for identities.  Usage: - Provide a search term to filter results. - The search term filters the response for identities where the email contains the search term. - The search is not case sensitive.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getIdentityCollection: async (page?: number, pageSize?: number, paginationMode?: 'default' | 'totalCount', filterEmail?: string, filterIsActive?: boolean, filterProjectId?: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        getIdentityCollection: async (page?: number, pageSize?: number, paginationMode?: 'default' | 'totalCount', filterEmail?: string, filterIsActive?: boolean, filterProjectId?: string, filterSearch?: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             const localVarPath = `/identity`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -179,6 +180,10 @@ export const IdentityApiAxiosParamCreator = function (configuration?: Configurat
 
             if (filterProjectId !== undefined) {
                 localVarQueryParameter['filter[projectId]'] = filterProjectId;
+            }
+
+            if (filterSearch !== undefined) {
+                localVarQueryParameter['filter[search]'] = filterSearch;
             }
 
 
@@ -325,11 +330,12 @@ export const IdentityApiFp = function(configuration?: Configuration) {
          * @param {string} [filterEmail] Email filter
          * @param {boolean} [filterIsActive] A filter to only return identities that are active or not.
          * @param {string} [filterProjectId] A filter to only return identities assigned to a specific project.
+         * @param {string} [filterSearch] A filter to search for identities.  Usage: - Provide a search term to filter results. - The search term filters the response for identities where the email contains the search term. - The search is not case sensitive.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async getIdentityCollection(page?: number, pageSize?: number, paginationMode?: 'default' | 'totalCount', filterEmail?: string, filterIsActive?: boolean, filterProjectId?: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<GetIdentityCollectionResponse>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.getIdentityCollection(page, pageSize, paginationMode, filterEmail, filterIsActive, filterProjectId, options);
+        async getIdentityCollection(page?: number, pageSize?: number, paginationMode?: 'default' | 'totalCount', filterEmail?: string, filterIsActive?: boolean, filterProjectId?: string, filterSearch?: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<GetIdentityCollectionResponse>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getIdentityCollection(page, pageSize, paginationMode, filterEmail, filterIsActive, filterProjectId, filterSearch, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
@@ -394,11 +400,12 @@ export const IdentityApiFactory = function (configuration?: Configuration, baseP
          * @param {string} [filterEmail] Email filter
          * @param {boolean} [filterIsActive] A filter to only return identities that are active or not.
          * @param {string} [filterProjectId] A filter to only return identities assigned to a specific project.
+         * @param {string} [filterSearch] A filter to search for identities.  Usage: - Provide a search term to filter results. - The search term filters the response for identities where the email contains the search term. - The search is not case sensitive.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getIdentityCollection(page?: number, pageSize?: number, paginationMode?: 'default' | 'totalCount', filterEmail?: string, filterIsActive?: boolean, filterProjectId?: string, options?: any): AxiosPromise<GetIdentityCollectionResponse> {
-            return localVarFp.getIdentityCollection(page, pageSize, paginationMode, filterEmail, filterIsActive, filterProjectId, options).then((request) => request(axios, basePath));
+        getIdentityCollection(page?: number, pageSize?: number, paginationMode?: 'default' | 'totalCount', filterEmail?: string, filterIsActive?: boolean, filterProjectId?: string, filterSearch?: string, options?: any): AxiosPromise<GetIdentityCollectionResponse> {
+            return localVarFp.getIdentityCollection(page, pageSize, paginationMode, filterEmail, filterIsActive, filterProjectId, filterSearch, options).then((request) => request(axios, basePath));
         },
         /**
          * Update one or more fields of an Identity
@@ -459,11 +466,12 @@ export interface IdentityApiInterface {
      * @param {string} [filterEmail] Email filter
      * @param {boolean} [filterIsActive] A filter to only return identities that are active or not.
      * @param {string} [filterProjectId] A filter to only return identities assigned to a specific project.
+     * @param {string} [filterSearch] A filter to search for identities.  Usage: - Provide a search term to filter results. - The search term filters the response for identities where the email contains the search term. - The search is not case sensitive.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof IdentityApiInterface
      */
-    getIdentityCollection(page?: number, pageSize?: number, paginationMode?: 'default' | 'totalCount', filterEmail?: string, filterIsActive?: boolean, filterProjectId?: string, options?: AxiosRequestConfig): AxiosPromise<GetIdentityCollectionResponse>;
+    getIdentityCollection(page?: number, pageSize?: number, paginationMode?: 'default' | 'totalCount', filterEmail?: string, filterIsActive?: boolean, filterProjectId?: string, filterSearch?: string, options?: AxiosRequestConfig): AxiosPromise<GetIdentityCollectionResponse>;
 
     /**
      * Update one or more fields of an Identity
@@ -528,12 +536,13 @@ export class IdentityApi extends BaseAPI implements IdentityApiInterface {
      * @param {string} [filterEmail] Email filter
      * @param {boolean} [filterIsActive] A filter to only return identities that are active or not.
      * @param {string} [filterProjectId] A filter to only return identities assigned to a specific project.
+     * @param {string} [filterSearch] A filter to search for identities.  Usage: - Provide a search term to filter results. - The search term filters the response for identities where the email contains the search term. - The search is not case sensitive.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof IdentityApi
      */
-    public getIdentityCollection(page?: number, pageSize?: number, paginationMode?: 'default' | 'totalCount', filterEmail?: string, filterIsActive?: boolean, filterProjectId?: string, options?: AxiosRequestConfig) {
-        return IdentityApiFp(this.configuration).getIdentityCollection(page, pageSize, paginationMode, filterEmail, filterIsActive, filterProjectId, options).then((request) => request(this.axios, this.basePath));
+    public getIdentityCollection(page?: number, pageSize?: number, paginationMode?: 'default' | 'totalCount', filterEmail?: string, filterIsActive?: boolean, filterProjectId?: string, filterSearch?: string, options?: AxiosRequestConfig) {
+        return IdentityApiFp(this.configuration).getIdentityCollection(page, pageSize, paginationMode, filterEmail, filterIsActive, filterProjectId, filterSearch, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
