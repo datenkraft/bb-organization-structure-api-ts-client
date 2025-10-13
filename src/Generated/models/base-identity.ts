@@ -32,5 +32,20 @@ export interface BaseIdentity {
      * @memberof BaseIdentity
      */
     'active'?: boolean;
+    /**
+     * The origin of the identity
+     * @type {string}
+     * @memberof BaseIdentity
+     */
+    'origin'?: BaseIdentityOriginEnum;
 }
+
+export const BaseIdentityOriginEnum = {
+    External: 'external',
+    Internal: 'internal',
+    UnknownDefaultOpenApi: '11184809'
+} as const;
+
+export type BaseIdentityOriginEnum = typeof BaseIdentityOriginEnum[keyof typeof BaseIdentityOriginEnum];
+
 
