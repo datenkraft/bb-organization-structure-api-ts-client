@@ -41,48 +41,6 @@ import { PatchIdentity } from '../models';
 export const IdentityApiAxiosParamCreator = function (configuration?: Configuration) {
     return {
         /**
-         * Delete an Identity by identityId
-         * @summary Delete an Identity by identityId
-         * @param {string} identityId Identity Id
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        deleteIdentity: async (identityId: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'identityId' is not null or undefined
-            assertParamExists('deleteIdentity', 'identityId', identityId)
-            const localVarPath = `/identity/{identityId}`
-                .replace(`{${"identityId"}}`, encodeURIComponent(String(identityId)));
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'DELETE', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            // authentication oAuthAuthorization required
-            // oauth required
-            await setOAuthToObject(localVarHeaderParameter, "oAuthAuthorization", [], configuration)
-
-            // authentication bearerAuth required
-            // http bearer authentication required
-            await setBearerAuthToObject(localVarHeaderParameter, configuration)
-
-
-    
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
          * Get an Identity by identityId
          * @summary Get an Identity by identityId
          * @param {string} identityId Identity Id
@@ -305,17 +263,6 @@ export const IdentityApiFp = function(configuration?: Configuration) {
     const localVarAxiosParamCreator = IdentityApiAxiosParamCreator(configuration)
     return {
         /**
-         * Delete an Identity by identityId
-         * @summary Delete an Identity by identityId
-         * @param {string} identityId Identity Id
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async deleteIdentity(identityId: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.deleteIdentity(identityId, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
-        },
-        /**
          * Get an Identity by identityId
          * @summary Get an Identity by identityId
          * @param {string} identityId Identity Id
@@ -378,16 +325,6 @@ export const IdentityApiFactory = function (configuration?: Configuration, baseP
     const localVarFp = IdentityApiFp(configuration)
     return {
         /**
-         * Delete an Identity by identityId
-         * @summary Delete an Identity by identityId
-         * @param {string} identityId Identity Id
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        deleteIdentity(identityId: string, options?: any): AxiosPromise<void> {
-            return localVarFp.deleteIdentity(identityId, options).then((request) => request(axios, basePath));
-        },
-        /**
          * Get an Identity by identityId
          * @summary Get an Identity by identityId
          * @param {string} identityId Identity Id
@@ -445,16 +382,6 @@ export const IdentityApiFactory = function (configuration?: Configuration, baseP
  */
 export interface IdentityApiInterface {
     /**
-     * Delete an Identity by identityId
-     * @summary Delete an Identity by identityId
-     * @param {string} identityId Identity Id
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof IdentityApiInterface
-     */
-    deleteIdentity(identityId: string, options?: AxiosRequestConfig): AxiosPromise<void>;
-
-    /**
      * Get an Identity by identityId
      * @summary Get an Identity by identityId
      * @param {string} identityId Identity Id
@@ -511,18 +438,6 @@ export interface IdentityApiInterface {
  * @extends {BaseAPI}
  */
 export class IdentityApi extends BaseAPI implements IdentityApiInterface {
-    /**
-     * Delete an Identity by identityId
-     * @summary Delete an Identity by identityId
-     * @param {string} identityId Identity Id
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof IdentityApi
-     */
-    public deleteIdentity(identityId: string, options?: AxiosRequestConfig) {
-        return IdentityApiFp(this.configuration).deleteIdentity(identityId, options).then((request) => request(this.axios, this.basePath));
-    }
-
     /**
      * Get an Identity by identityId
      * @summary Get an Identity by identityId
