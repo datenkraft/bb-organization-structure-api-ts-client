@@ -133,10 +133,11 @@ export const CustomerApiAxiosParamCreator = function (configuration?: Configurat
          * @param {number} [pageSize] The maximum size per page is 100. Default is 100.
          * @param {'default' | 'totalCount'} [paginationMode] The paginationMode to use: - default: The total number of items in the collection will not be calculated. - totalCount: The total number of items in the collection will be calculated. This can mean loss of performance.
          * @param {string} [filterOrganizationId] Organization Id
+         * @param {string} [filterSearch] A filter to search for customers.  Usage: - Provide a search term to filter results. - The search term filters the response for identities where the name contains the search term. - The search is not case sensitive.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getCustomerCollection: async (page?: number, pageSize?: number, paginationMode?: 'default' | 'totalCount', filterOrganizationId?: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        getCustomerCollection: async (page?: number, pageSize?: number, paginationMode?: 'default' | 'totalCount', filterOrganizationId?: string, filterSearch?: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             const localVarPath = `/customer`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -171,6 +172,10 @@ export const CustomerApiAxiosParamCreator = function (configuration?: Configurat
 
             if (filterOrganizationId !== undefined) {
                 localVarQueryParameter['filter[organizationId]'] = filterOrganizationId;
+            }
+
+            if (filterSearch !== undefined) {
+                localVarQueryParameter['filter[search]'] = filterSearch;
             }
 
 
@@ -315,11 +320,12 @@ export const CustomerApiFp = function(configuration?: Configuration) {
          * @param {number} [pageSize] The maximum size per page is 100. Default is 100.
          * @param {'default' | 'totalCount'} [paginationMode] The paginationMode to use: - default: The total number of items in the collection will not be calculated. - totalCount: The total number of items in the collection will be calculated. This can mean loss of performance.
          * @param {string} [filterOrganizationId] Organization Id
+         * @param {string} [filterSearch] A filter to search for customers.  Usage: - Provide a search term to filter results. - The search term filters the response for identities where the name contains the search term. - The search is not case sensitive.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async getCustomerCollection(page?: number, pageSize?: number, paginationMode?: 'default' | 'totalCount', filterOrganizationId?: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<GetCustomerCollectionResponse>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.getCustomerCollection(page, pageSize, paginationMode, filterOrganizationId, options);
+        async getCustomerCollection(page?: number, pageSize?: number, paginationMode?: 'default' | 'totalCount', filterOrganizationId?: string, filterSearch?: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<GetCustomerCollectionResponse>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getCustomerCollection(page, pageSize, paginationMode, filterOrganizationId, filterSearch, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
@@ -382,11 +388,12 @@ export const CustomerApiFactory = function (configuration?: Configuration, baseP
          * @param {number} [pageSize] The maximum size per page is 100. Default is 100.
          * @param {'default' | 'totalCount'} [paginationMode] The paginationMode to use: - default: The total number of items in the collection will not be calculated. - totalCount: The total number of items in the collection will be calculated. This can mean loss of performance.
          * @param {string} [filterOrganizationId] Organization Id
+         * @param {string} [filterSearch] A filter to search for customers.  Usage: - Provide a search term to filter results. - The search term filters the response for identities where the name contains the search term. - The search is not case sensitive.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getCustomerCollection(page?: number, pageSize?: number, paginationMode?: 'default' | 'totalCount', filterOrganizationId?: string, options?: any): AxiosPromise<GetCustomerCollectionResponse> {
-            return localVarFp.getCustomerCollection(page, pageSize, paginationMode, filterOrganizationId, options).then((request) => request(axios, basePath));
+        getCustomerCollection(page?: number, pageSize?: number, paginationMode?: 'default' | 'totalCount', filterOrganizationId?: string, filterSearch?: string, options?: any): AxiosPromise<GetCustomerCollectionResponse> {
+            return localVarFp.getCustomerCollection(page, pageSize, paginationMode, filterOrganizationId, filterSearch, options).then((request) => request(axios, basePath));
         },
         /**
          * Update one or more fields of a Customer
@@ -445,11 +452,12 @@ export interface CustomerApiInterface {
      * @param {number} [pageSize] The maximum size per page is 100. Default is 100.
      * @param {'default' | 'totalCount'} [paginationMode] The paginationMode to use: - default: The total number of items in the collection will not be calculated. - totalCount: The total number of items in the collection will be calculated. This can mean loss of performance.
      * @param {string} [filterOrganizationId] Organization Id
+     * @param {string} [filterSearch] A filter to search for customers.  Usage: - Provide a search term to filter results. - The search term filters the response for identities where the name contains the search term. - The search is not case sensitive.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof CustomerApiInterface
      */
-    getCustomerCollection(page?: number, pageSize?: number, paginationMode?: 'default' | 'totalCount', filterOrganizationId?: string, options?: AxiosRequestConfig): AxiosPromise<GetCustomerCollectionResponse>;
+    getCustomerCollection(page?: number, pageSize?: number, paginationMode?: 'default' | 'totalCount', filterOrganizationId?: string, filterSearch?: string, options?: AxiosRequestConfig): AxiosPromise<GetCustomerCollectionResponse>;
 
     /**
      * Update one or more fields of a Customer
@@ -512,12 +520,13 @@ export class CustomerApi extends BaseAPI implements CustomerApiInterface {
      * @param {number} [pageSize] The maximum size per page is 100. Default is 100.
      * @param {'default' | 'totalCount'} [paginationMode] The paginationMode to use: - default: The total number of items in the collection will not be calculated. - totalCount: The total number of items in the collection will be calculated. This can mean loss of performance.
      * @param {string} [filterOrganizationId] Organization Id
+     * @param {string} [filterSearch] A filter to search for customers.  Usage: - Provide a search term to filter results. - The search term filters the response for identities where the name contains the search term. - The search is not case sensitive.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof CustomerApi
      */
-    public getCustomerCollection(page?: number, pageSize?: number, paginationMode?: 'default' | 'totalCount', filterOrganizationId?: string, options?: AxiosRequestConfig) {
-        return CustomerApiFp(this.configuration).getCustomerCollection(page, pageSize, paginationMode, filterOrganizationId, options).then((request) => request(this.axios, this.basePath));
+    public getCustomerCollection(page?: number, pageSize?: number, paginationMode?: 'default' | 'totalCount', filterOrganizationId?: string, filterSearch?: string, options?: AxiosRequestConfig) {
+        return CustomerApiFp(this.configuration).getCustomerCollection(page, pageSize, paginationMode, filterOrganizationId, filterSearch, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
