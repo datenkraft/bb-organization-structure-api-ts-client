@@ -7,13 +7,12 @@ describe("Client Test (staging)", () => {
     const configOptions: ConfigOptions = {
       clientId: process.env.DEV_CLIENT_ID ?? "",
       clientSecret: process.env.DEV_CLIENT_SECRET_STAGING ?? "",
-      oAuthTokenHost:
-        "https://authentication-api.staging.backbone.datenkraft.info",
+      oAuthTokenHost: "https://authentication-api.sandbox.steve.niceshops.com",
     };
 
     OrganizationStructureApiClient.getApiConfig(
       configOptions,
-      "https://organization-structure-api.staging.backbone.datenkraft.info/v2"
+      "https://organization-structure-api.sandbox.steve.niceshops.com/v2"
     )
       .then((config) => {
         const authRoleApi = new AuthRoleApi(config);
