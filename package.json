@@ -1,6 +1,6 @@
 {
   "name": "@datenkraft/bb-organization-structure-api-ts-client",
-  "homepage": "https://bitbucket.org/datenkraft/bb-organization-structure-api-ts-client#readme",
+  "homepage": "https://github.com/datenkraft/bb-organization-structure-api-ts-client#readme",
   "version": "2.6.18",
   "description": "The organization-structure API TS Client enables you to work with the organization-structure API",
   "main": "dist/index.js",
@@ -29,7 +29,7 @@
   ],
   "repository": {
     "type": "git",
-    "url": "git+ssh://git@bitbucket.org/datenkraft/bb-organization-structure-api-ts-client.git"
+    "url": "git+https://github.com/datenkraft/bb-organization-structure-api-ts-client.git"
   },
   "devDependencies": {
     "@openapitools/openapi-generator-cli": "^2.5.2",
